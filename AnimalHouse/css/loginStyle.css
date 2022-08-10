@@ -2,6 +2,10 @@ html, body {
   height: 100%;
 }
 
+p {
+  color: white;
+}
+
 body {
   display: flex;
   align-items: center;

@@ -10,7 +10,6 @@
 
 .site-header a {
   color: #8e8e8e;
-  transition: color .15s ease-in-out;
   text-decoration: none;
 }
 
@@ -40,10 +39,6 @@ a {
   text-align: center;
   white-space: nowrap;
   -webkit-overflow-scrolling: touch;
-}
-
-.container {
-  max-width: 960px;
 }
 
 /*

@@ -4,15 +4,15 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>Homepage Utente</title>
+    <title>Bacheca Utenti</title>
 
     <script src="../assets/dist/js/bootstrap.bundle.min.js"></script>
 
-    <link rel="canonical" href="https://getbootstrap.com/docs/5.2/examples/product/">
+    <link rel="canonical" href="https://getbootstrap.com/docs/5.2/examples/blog/">
     <!-- CSS only -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
-    <!-- icone-->
-    <link href="../assets/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Custom styles for this template -->
+    <link href="https://fonts.googleapis.com/css?family=Playfair&#43;Display:700,900&amp;display=swap" rel="stylesheet">
     <!-- Custom styles for this template -->
     <link href="css/homeStyle.css" rel="stylesheet">
   </head>
@@ -32,31 +32,34 @@
         <a class="py-2 d-none d-md-inline-block" href="homepage.html">Logout</a>
       </nav>
     </header>
-
+    
     <main>
-      <div class="position-relative overflow-hidden p-3 p-md-5 m-md-3 text-center bg-light" style="background-image: url();">
-        <div class="col-md-5 p-lg-5 mx-auto my-5">
-          <h1 class="display-4 fw-normal">E-COMMERCE</h1>
-          <p class="lead">Scopri il catalogo di prodotti per animali acquistabili online: cibo, prodotti sanitari, accessori, e molto altro.</p>
-          <a class="btn btn-outline-secondary" href="product.html">Apri il catalogo</a>
+        <div class="row" >
+            <div class="col-1"></div>
+            <div class="col-10 rounded" style="background-color: lightgrey; margin-top: 20px; padding: 0px;">
+                <div class="col-6">
+                <h1>Title of a longer featured blog post</h1>
+                <p class="">Multiple lines of text that form the lede, informing new readers quickly and efficiently about what’s most interesting in this post’s contents.</p>
+                </div>
+            </div>
+
+            <div class="col-1"></div>
+            <div class="col-1"></div>
+            <div class="col-10" style="margin-top: 20px; padding: 0px;">
+                <div class="row border rounded">
+                    <div class="col-7">
+                        <h3 class="">Featured post</h3>
+                        <div class="text-muted">Nov 12</div>
+                        <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content.</p>
+                    </div>
+                    <div class="col-1"></div>
+                    <div class="col-3" style="text-align: center;">
+                        <img src="images/cibo.jpg" alt="" style="height: 200px;">
+                    </div>
+                </div>
+            </div>
         </div>
-      </div>
-      <div class="d-md-flex flex-md-equal w-100 my-md-3 ps-md-3">
-        <div class="text-bg-light me-md-3 pt-3 px-3 pt-md-5 px-md-5 text-center overflow-hidden">
-          <div class="my-3 py-3">
-            <h2 class="display-5">BACHECA</h2>
-            <p class="lead">Scopri la bacheca per la condivisione di immagini o aneddoti sui vostri cuccioli.</p>
-            <a class="btn btn-outline-secondary" href="board.html">Apri la bacheca</a>
-          </div>
-        </div>
-        <div class="bg-light me-md-3 pt-3 px-3 pt-md-5 px-md-5 text-center overflow-hidden">
-          <div class="my-3 p-3">
-            <h2 class="display-5">LEADERBOARD</h2>
-            <p class="lead">Scopri la leaderboard con il punteggio ottenuto nei vari giochi.</p>
-            <a class="btn btn-outline-secondary" href="#">I tuoi punteggi</a>
-          </div>
-        </div>
-      </div>
+
     </main>
 
     <footer>

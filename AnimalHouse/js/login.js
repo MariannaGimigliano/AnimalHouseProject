@@ -15,16 +15,9 @@ app.get('/login', (req, res) => {
 
 const fs = require('fs')
 
-/*const customer = {
-    name: "Newbie Co.",
-    order_count: 0,
-    address: "Po Box City",
-}
-const jsonString = JSON.stringify(customer)*/
-
 let us
 
-var usersArray = JSON.parse(fs.readFileSync("user.json"))
+var usersArray = JSON.parse(fs.readFileSync("./json/user.json"))
 
 loginHandler = function(request, response){
     email = request.body.emailInput
@@ -42,16 +35,6 @@ loginHandler = function(request, response){
     response.send("<h1>" + msg + "</h1>");
 }
 app.post("/login", loginHandler);
-
-/*fs.writeFile('user.json', jsonString, err => {
-    if (err) {
-        console.log('Error writing file', err)
-    } else {
-        console.log('Successfully wrote file')
-    }
-})*/
-
-
 
 /*
 *  Lancia il server WWW

@@ -1,0 +1,33 @@
+h1{
+    text-align: center;
+}
+img {
+    width: 50%;
+    left:100%;
+}
+
+input {
+    display: block;
+    margin: 0 auto;
+    width: 100px;
+    background-color: rgba(0, 0, 0, .85);
+    -webkit-backdrop-filter: saturate(180%) blur(20px);
+    backdrop-filter: saturate(180%) blur(20px);
+    color: white;
+}
+
+#domanda {
+  margin-left: 3%;
+  margin-right: 3%;
+}
+
+#immagine{
+    margin-left: 3%;
+    margin-right: 45%;
+  }
+
+#risposte {
+    margin-right: 3%;
+    margin-left: 45%;
+    position: static;
+}

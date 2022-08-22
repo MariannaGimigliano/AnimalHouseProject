@@ -1,0 +1,163 @@
+<!doctype html>
+<html lang="it">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Quiz</title>
+
+    <script src="../assets/dist/js/bootstrap.bundle.min.js"></script>
+
+    <link rel="canonical" href="https://getbootstrap.com/docs/5.2/examples/product/">
+    <!-- CSS only -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
+    <!-- icone-->
+    <link href="../assets/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Custom styles for this template -->
+    <link href="css/homeStyle.css" rel="stylesheet">
+    <link href="css/quizStyle.css" rel="stylesheet">
+  </head>
+
+  <body>
+
+    <div class="row" style="background-color: rgba(0, 0, 0, .85);"> 
+      <div class="col-4"></div>
+      <div class="col-4" style=" text-align: center;"> 
+        <img src="images/animalhouse.png" alt="" style="height: 100px; text-align: center;">
+      </div>
+    </div>
+
+    <header class="site-header sticky-top">
+      <nav class="d-flex flex-column flex-md-row" style="justify-content: space-evenly;">
+        <a class="py-2 d-none d-md-inline-block" href="homepage.html">Home</a>
+        <a class="py-2 d-none d-md-inline-block" href="game.html">Giochi</a>
+        <a class="py-2 d-none d-md-inline-block" href="login.html">Login</a>
+      </nav>
+    </header>
+
+    <main>
+        <h1>Quiz</h1>
+        <h1>Prova ad indovinare di che animale si tratta dalla foto!</h1>
+        <input type="button" value="Inizia il quiz" onclick="sendRequest()">
+
+        <br>
+
+        <div id="domanda">
+
+        </div>
+
+        <div id="immagine">
+            
+        </div>   
+
+        <div id="risposte">
+            
+        </div>
+
+
+    </main>
+
+    <footer>
+      <div class="row">
+        <div class="col-6 col-md">
+          <ul class="list text-small">
+            <h5>Pagine</h5>
+            <li><a class="link-secondary" href="homepage.html">Homepage</a></li>
+            <li><a class="link-secondary" href="game.html">Giochi</a></li>
+            <li><a class="link-secondary" href="#">Scopri chi siamo</a></li>
+          </ul>
+        </div>
+        <div class="col-6 col-md">
+          <ul class="list text-small">
+            <h5>Utente</h5>
+            <li><a class="link-secondary" href="login.html">Login</a></li>
+            <li><a class="link-secondary" href="register.html">Registrazione</a></li>
+          </ul>
+        </div>
+      </div>
+    </footer> 
+
+  </body>
+</html>
+
+<script>
+
+    function sendRequest() {
+        let request = new XMLHttpRequest();
+        request.open("GET", "https://zoo-animal-api.herokuapp.com/animals/rand/");
+        request.send();
+        request.onload = () => {
+            if (request.status == 200) {
+                var animaliJSON = JSON.parse(request.response);
+                mostraDomanda(animaliJSON);
+                mostraRisposte(animaliJSON);
+                console.log(animaliJSON);
+            } else {
+                //errore
+                console.log(`error ${request.status} ${request.statusText}`);
+            }
+        }
+    }
+    
+    function mostraDomanda(animaliJSON) {
+        var arrayLength = animaliJSON.length;
+        var containerDomanda = document.getElementById("domanda");
+        var containerImmagine = document.getElementById("immagine");
+        
+        //resetto i contenitori ogni volta che clicco il bottone
+        containerDomanda.innerHTML = "";
+        containerImmagine.innerHTML = "";
+        //rispostePossibili.innerHTML = "";
+
+        var domanda = document.createElement("p");
+        domanda.innerHTML = "Di che animale si tratta?";
+        containerDomanda.appendChild(domanda);
+
+        //estraiamo un immagine
+        var immagine = document.createElement("img");
+        immagine.src = animaliJSON.image_link;
+        containerImmagine.appendChild(immagine);
+        //for (var i = 0; i < 3; i++){
+        //    mostraRisposte(animaliJSON);
+        //}
+    
+    }
+
+    function mostraRisposte (animaliJSON){
+        var containerRisposte = document.getElementById("risposte");
+        
+        //creiamo le tre risposte possibili
+        //usiamo input type=radio
+        containerRisposte.innerHTML = "";
+
+        var label = document.createElement ("label");
+        var input = document.createElement ("input");
+        input.type = "radio";
+        console.log (animaliJSON.name);
+        input.value = animaliJSON.name;
+        input.name = animaliJSON.name;
+        input.innerHTML = animaliJSON.name;
+        label.innerHTML = animaliJSON.name;
+        containerRisposte.appendChild(input);
+        containerRisposte.appendChild(label);
+
+        new sendRequest();
+        
+        var label2 = document.createElement ("label");
+        var input2 = document.createElement ("input");
+        input2.type = "radio";
+        console.log (animaliJSON.name);
+        input2.value = animaliJSON.name;
+        input2.name = animaliJSON.name;
+        input2.innerHTML = animaliJSON.name;
+        label2.innerHTML = animaliJSON.name;
+        containerRisposte.appendChild(input2);
+        containerRisposte.appendChild(label2);
+
+
+
+        input1.onclick = function() {
+            //...
+        }
+    }
+    </script>

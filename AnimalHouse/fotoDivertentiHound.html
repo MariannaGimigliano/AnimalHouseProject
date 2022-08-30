@@ -39,7 +39,6 @@
 
     <div class="position-relative overflow-hidden p-3 p-md-5 m-md-3 text-center bg-light" style="background-image: url();">
       <h1 class="display-4 fw-normal">Scopri con noi le diverse razze del segugio</h1>
-      <h1 class="display-4 fw-normal">Premi il pulsante!</h1>
     </div>
 
     <main >
@@ -128,6 +127,8 @@
     afghan.innerHTML = "Hound Afghan";
     containerAfghan.appendChild(afghan);
 
+    
+    //per 4 volte mi stampa 1 immagine prendendo dei numeri a random come indice 
     for (var i = 0; i < 4; i++){ //239
       var immagine = document.createElement("img");
       immagine.src = houndJSON.message[i];
@@ -139,7 +140,7 @@
     basset.innerHTML = "Hound Basset";
     containerBasset.appendChild(basset);
 
-    for (var i = 239; i < 242; i++){ //414
+    for (var i = 239; i < 243; i++){ //414
       var immagine = document.createElement("img");
       immagine.src = houndJSON.message[i];
       //console.log(houndJSON.message[i]);

@@ -18,7 +18,7 @@
     <link href="css/fotoDivertentiStyle.css" rel="stylesheet">
   </head>
 
-  <body>
+  <body onload="sendRequest()">
 
     <div class="row" style="background-color: rgba(0, 0, 0, .85);"> 
       <div class="col-4"></div>
@@ -42,9 +42,7 @@
       <h1 class="display-4 fw-normal">Premi il pulsante!</h1>
     </div>
 
-    <main>
-      <input class="btn btn-outline-secondary" id="next" type="button" value = "Vedi foto" onclick="sendRequest()"/>
-
+    <main >
       <div id="razzaAfghan">
 
       </div>
@@ -130,7 +128,7 @@
     afghan.innerHTML = "Hound Afghan";
     containerAfghan.appendChild(afghan);
 
-    for (var i = 0; i < 239; i++){
+    for (var i = 0; i < 4; i++){ //239
       var immagine = document.createElement("img");
       immagine.src = houndJSON.message[i];
       //console.log(houndJSON.message[i]);
@@ -141,7 +139,7 @@
     basset.innerHTML = "Hound Basset";
     containerBasset.appendChild(basset);
 
-    for (var i = 239; i < 414; i++){
+    for (var i = 239; i < 242; i++){ //414
       var immagine = document.createElement("img");
       immagine.src = houndJSON.message[i];
       //console.log(houndJSON.message[i]);
@@ -153,7 +151,7 @@
     blood.innerHTML = "Hound Blood";
     containerBlood.appendChild(blood);
 
-    for (var i = 414; i < 601; i++){
+    for (var i = 414; i < 418; i++){ //601
       var immagine = document.createElement("img");
       immagine.src = houndJSON.message[i];
       //console.log(houndJSON.message[i]);
@@ -165,7 +163,7 @@
     english.innerHTML = "Hound English";
     containerEnglish.appendChild(english);
 
-    for (var i = 601; i < 758; i++){
+    for (var i = 601; i < 605; i++){ //758
       var immagine = document.createElement("img");
       immagine.src = houndJSON.message[i];
       //console.log(houndJSON.message[i]);
@@ -177,7 +175,7 @@
     ibizan.innerHTML = "Hound Ibizan";
     containerIbizan.appendChild(ibizan);
 
-    for (var i = 758; i < 946; i++){
+    for (var i = 758; i < 762; i++){ //946
       var immagine = document.createElement("img");
       immagine.src = houndJSON.message[i];
       //console.log(houndJSON.message[i]);
@@ -201,7 +199,7 @@
     walker.innerHTML = "Hound Walker";
     containerWalker.appendChild(walker);
 
-    for (var i = 948; i < arrayLength; i++){
+    for (var i = 948; i < 952; i++){ //arrayLength
       var immagine = document.createElement("img");
       immagine.src = houndJSON.message[i];
       //console.log(houndJSON.message[i]);

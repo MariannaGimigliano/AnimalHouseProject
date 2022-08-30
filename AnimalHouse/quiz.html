@@ -35,46 +35,50 @@
       </nav>
     </header>
 
-    <a class="btn btn-outline-secondary" href="game.html">Torna indietro</a>
+    <a class="btn btn-outline-secondary" id ="back" href="game.html">Torna indietro</a>
 
-    <h1>Quiz</h1>
-    <h1>Prova ad indovinare di che animale si tratta dalla foto!</h1>
+    <div class="position-relative overflow-hidden p-3 p-md-5 m-md-3 text-center bg-light" style="background-image: url();">
+      <h1 class="display-4 fw-normal">Quiz</h1>
+      <h1 class="display-4 fw-normal">Prova ad indovinare di che animale si tratta dalla foto!</h1>
+    </div>
 
-    <main id = "contenitoreMain">
-        
-        <input id="inizia" class="btn btn-outline-primary" type="button" value="Inizia il quiz" onclick="sendRequest()">
-        
-        <input id="next" class="btn btn-outline-primary" type="button" style = "display:none" value="Prossima domanda" onclick="sendRequest()">
+    <main id="contenitoreMain">
+      
+      <input id="inizia" class="btn btn-outline-secondary" type="button" value="Inizia il quiz" onclick="sendRequest()">
+      
+      <input id="next" class="btn btn-outline-secondary" type="button" style = "display:none" value="Prossima domanda" onclick="sendRequest()">
 
-        <div id="domanda">
+      <div id="domanda">
 
+      </div>
+
+      <div id="immagine">
+          
+      </div>   
+
+      <form>
+        <div id="risposte">
+          
         </div>
 
-        <div id="immagine">
-            
-        </div>   
+        <button id = "controlla" class="btn btn-outline-secondary" type="submit" style = "display:none">Controlla risposta</button>
+      </form>
 
-        <form>
-          <div id="risposte">
-            
-          </div>
+      <div id="rispostaSelezionata">
 
-          <button id = "controlla" class="btn btn-outline-primary" type="submit" style = "display:none">Controlla risposta</button>
-        </form>
+      </div>
 
-        <div id="rispostaSelezionata">
+      <div id="rispostaCorretta">
 
-        </div>
-
-        <div id="rispostaCorretta">
-
-        </div>
+      </div>
           
     </main>
 
     <div id="mostraRisultato">
 
     </div>
+
+    
 
     <footer>
       <div class="row">
@@ -182,9 +186,9 @@
     var btn1 = document.getElementById("inizia");
     btn1.style.display = "none";
 
-    //mostro pulsante per passare alla domanda successiva
+    //ogni volta che c'è una nuova domanda nascondo il pulsante per la prossima domanda prima della risposta
     var btn2 = document.getElementById("next");
-    btn2.style.display = "block";
+    btn2.style.display = "none";
 
     //mostro pulsante per controllare la risposta data
     var btn3 = document.getElementById("controlla");
@@ -203,35 +207,45 @@
       const data = new FormData(form);
       let output = "";
       for (const entry of data) {
-        output = `${output}${entry[1]}\r`;
+        output = `${output}${entry[1]}\r`; //variabile che clicchi
         valoreRadioSelezionato = `${entry[1]}\r`; 
       };
 
-      rispostaSelezionata.innerHTML= "Hai selezionato questa risposta: " + output;
-      event.preventDefault();
+      //nascondo il bottone quando la risposta è già stata data
+      btn3.style.display = "none";
 
-      rispostaCorretta.innerHTML = "La risposta corretta è: " + nomeAnimaleCorretto;
+      //mostro pulsante per passare alla domanda successiva
+      btn2.style.display = "block";
 
-      console.log(valoreRadioSelezionato + "/");
-      console.log (nomeAnimaleCorretto + "/");
+      //console.log(valoreRadioSelezionato);
+      //console.log (nomeAnimaleCorretto);
 
       if (valoreRadioSelezionato.trim() == nomeAnimaleCorretto.trim()){
+        rispostaSelezionata.innerHTML= "La risposta che hai selezionato è giusta!";
+        event.preventDefault();
+
         console.log("RISPOSTA SELEZIONATA CORRETTA");
         punteggio++;
         console.log("Punteggio: " + punteggio);
 
       } else if (valoreRadioSelezionato.trim() != nomeAnimaleCorretto.trim()){
+        rispostaSelezionata.innerHTML= "La tua risposta è sbagliata!";
+        event.preventDefault();
+
         console.log("RISPOSTA SELEZIONATA NON CORRETTA");
         console.log("Punteggio: " + punteggio);
         
       }
+
+      rispostaCorretta.innerHTML = "La risposta corretta è: " + nomeAnimaleCorretto;
+
       containerRisultato.innerHTML = "";
-      p.innerHTML = "Il tuo punteggio è: " + punteggio;
+      p.innerHTML = "Punteggio: " + punteggio;
       containerRisultato.appendChild(p);
   
     }, false);
 
-    console.log(i);
+    //console.log(i);
 
     if (i >= 6){ //blocco il gioco alla sesta domanda e mostro i punteggi
       console.log ("Quiz terminato");
@@ -269,12 +283,10 @@
     input.innerHTML = "";
 
     label.innerHTML = animaliJSON.name;
-    label.for = "radio";
 
     input.type = "radio";
     //console.log (animaliJSON.name);
     input.value = animaliJSON.name;
-    input.id = "radio";
     input.name = "radio";
     input.innerHTML = animaliJSON.name;
 

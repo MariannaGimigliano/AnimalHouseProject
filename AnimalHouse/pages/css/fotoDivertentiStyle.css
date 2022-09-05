@@ -1,0 +1,22 @@
+h1{
+    text-align: center;
+}
+
+input {
+    display: block;
+    margin: 0 auto;
+    width: 100px;
+    background-color: rgba(0, 0, 0, .85);
+    -webkit-backdrop-filter: saturate(180%) blur(20px);
+    backdrop-filter: saturate(180%) blur(20px);
+    color: white;
+}
+
+div {
+  margin-left: 3%;
+  margin-right: 3%;
+}
+
+#immagine {
+    text-align: center;
+}

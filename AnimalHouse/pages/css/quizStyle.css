@@ -1,0 +1,37 @@
+h1{
+    text-align: center;
+}
+
+img {
+    width: 50%;
+    left:100%;
+}
+
+main {
+    margin-left: 3%;
+    margin-right: 3%;
+}
+
+#mostraRisultato{
+    margin-left: 3%;
+    margin-right: 3%;
+}
+
+input[type="radio"] {
+    display: block;
+    margin: 0 auto;
+    position:sticky;
+}
+
+#immagine{
+    margin-left: 3%;
+    margin-right: 45%;
+}
+
+#rispostaCorretta {
+    color: green;
+}
+
+h4 {
+    text-align: center;
+}

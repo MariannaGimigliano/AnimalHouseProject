@@ -32,17 +32,17 @@
       </nav>
     </header>
 
+    <a class="btn btn-outline-secondary" id="back" href="contenutiBuffiInteressanti.html">Torna indietro</a>
+
+    <div class="position-relative overflow-hidden p-3 p-md-5 m-md-3 text-center bg-light" style="background-image: url();">
+      <h1 class="display-4 fw-normal">Ecco qui un po' di foto divertenti di volpi</h1>
+      <h1 class="display-4 fw-normal">Premi il pulsante!</h1>
+    </div>
+
     <main>
-        <h1>Ecco qui un po' di foto divertenti di volpi</h1>
-        <h1>Premi il pulsante!</h1>
-        <input type="button" value = "Vedi foto" onclick="sendRequest()"/>
-        <br>
+        <input class="btn btn-outline-secondary" id="next" type="button" value = "Vedi foto" onclick="sendRequest()"/>  
 
-        <div id="container">
-            
-        </div>   
-
-        <div id="immagine">
+        <div id="containerImmagine">
 
         </div>
     </main>
@@ -70,34 +70,29 @@
   </body>
 </html>
 <script>
-    function sendRequest() {
-        let request = new XMLHttpRequest();
-        request.open("GET", "https://randomfox.ca/floof/");
-        request.send();
-        request.onload = () => {
-            if (request.status == 200) {
-                var volpiJSON = JSON.parse(request.response);
-                mostraFoto(volpiJSON);
-                //console.log(volpiJSON);
-            } else { //errore
-                console.log(`error ${request.status} ${request.statusText}`);
-            }
-        }
+  function sendRequest() {
+    let request = new XMLHttpRequest();
+    request.open("GET", "https://randomfox.ca/floof/");
+    request.send();
+    request.onload = () => {
+      if (request.status == 200) {
+        var volpiJSON = JSON.parse(request.response);
+        mostraFoto(volpiJSON);
+        //console.log(volpiJSON);
+      } else { //errore
+        console.log(`error ${request.status} ${request.statusText}`);
+      }
     }
-    
-    function mostraFoto(volpiJSON) {
-      var container = document.getElementById("container");
-      var imm = document.getElementById("immagine");
+  }
+  
+  function mostraFoto(volpiJSON) {
+    var containerImmagine = document.getElementById("containerImmagine");
+    containerImmagine.innerHTML = "";
+    //console.log(volpiJSON.image);
 
-      container.innerHTML = "";
-      imm.innerHTML = "";
+    var immagine = document.createElement("img");
+    immagine.src = volpiJSON.image;
 
-      //console.log(volpiJSON.image);
-
-      var immagine = document.createElement("img");
-      immagine.src = volpiJSON.image;
-
-      imm.appendChild(immagine); 
-      
-    }
+    containerImmagine.appendChild(immagine); 
+  }
 </script>

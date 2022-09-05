@@ -32,18 +32,19 @@
       </nav>
     </header>
 
+    <a class="btn btn-outline-secondary" id="back" href="contenutiBuffiInteressanti.html">Torna indietro</a>
+
+    <div class="position-relative overflow-hidden p-3 p-md-5 m-md-3 text-center bg-light" style="background-image: url();">
+      <h1 class="display-4 fw-normal">Ecco qui un po' di foto divertenti di anatre</h1>
+      <h1 class="display-4 fw-normal">Premi il pulsante!</h1>
+    </div>
+
     <main>
-        <h1>Ecco qui un po' di foto divertenti di anatre</h1>
-        <h1>Premi il pulsante!</h1>
-        <input type="button" value = "Vedi foto" onclick="sendRequest()"/>
-        <br>
-            <div id="container">
-                
-            </div>   
+        <input class="btn btn-outline-secondary" id="next" type="button" value = "Vedi foto" onclick="sendRequest()"/>
+    
+        <div id="containerImmagine">
 
-            <div id="immagine">
-
-            </div>
+        </div>
     </main>
 
     <footer>
@@ -71,35 +72,32 @@
 </html>
 
 <script>
-    function sendRequest() {
-      let request = new XMLHttpRequest();
-      request.open("GET", "https://random-d.uk/api/v2/random");
-      request.send();
-      request.onload = () => {
-        if (request.status == 200) {
-          var anatreJSON = JSON.parse(request.response);
-          mostraFoto(anatreJSON);
-          console.log(anatreJSON);
-        } else { //errore
-          console.log(`error ${request.status} ${request.statusText}`);
-        }
+  function sendRequest() {
+    let request = new XMLHttpRequest();
+    request.open("GET", "https://random-d.uk/api/v2/random");
+    request.send();
+    request.onload = () => {
+      if (request.status == 200) {
+        var anatreJSON = JSON.parse(request.response);
+        mostraFoto(anatreJSON);
+        console.log(anatreJSON);
+      } else { //errore
+        console.log(`error ${request.status} ${request.statusText}`);
       }
     }
-    
-    function mostraFoto(anatreJSON) {
-      var container = document.getElementById("container");
-      var imm = document.getElementById("immagine");
+  }
+  
+  function mostraFoto(anatreJSON) {
+    var containerImmagine = document.getElementById("containerImmagine");
 
-      container.innerHTML = "";
-      imm.innerHTML = "";
-      
-      console.log(anatreJSON.url);
+    containerImmagine.innerHTML = "";
+  
+    console.log(anatreJSON.url);
 
-      var immagine = document.createElement("img");
-      immagine.src = anatreJSON.url;
+    var immagine = document.createElement("img");
+    immagine.src = anatreJSON.url;
 
-      imm.appendChild(immagine); 
-        
-    }
+    containerImmagine.appendChild(immagine);   
+  }
     
 </script>

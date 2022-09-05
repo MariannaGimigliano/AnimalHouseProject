@@ -41,9 +41,9 @@
     
     <main id = "contenitoreMain">
         
-        <input id="inizia" class="btn btn-outline-primary" type="button" value="Inizia il quiz" onclick="sendRequest()">
+        <input id="inizia" class="btn btn-outline-secondary" type="button" value="Inizia il quiz" onclick="sendRequest()">
         
-        <input id="next" class="btn btn-outline-primary" type="button" style = "display:none" value="Prossima domanda" onclick="sendRequest()">
+        <input id="next" class="btn btn-outline-secondary" type="button" style = "display:none" value="Prossima domanda" onclick="sendRequest()">
 
         <div id="domanda">
 
@@ -58,7 +58,7 @@
             
           </div>
 
-          <button id = "controlla" class="btn btn-outline-primary" type="submit" style = "display:none">Controlla risposta</button>
+          <button id = "controlla" class="btn btn-outline-secondary" type="submit" style = "display:none">Controlla risposta</button>
         </form>
 
         <div id="rispostaSelezionata">
@@ -291,7 +291,7 @@
     let request = new XMLHttpRequest();
     request.open("POST", "/salvaPunti");
     request.setRequestHeader("Content-Type", "application/json");
-    request.send(
+    request.send( //nuova richiesta per salvare i punti con questi parametri
       JSON.stringify({
       "game": "quiz",
       "points": parseInt(points)

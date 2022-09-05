@@ -1,15 +1,29 @@
-h1{
-    text-align: center;
-}
-
 img {
-    width: 50%;
-    left:100%;
+    width: auto;
+    height: 300px;
 }
 
-main {
-    margin-left: 3%;
-    margin-right: 3%;
+label {
+    text-align: right;
+    margin-right: 0%;
+}
+
+#risposte{
+    display: grid;
+    grid-template-rows: 1fr 1fr 1fr;
+    grid-template-columns: 1fr 1fr;
+    gap: 5px;
+    margin-top: 1%;
+    margin-bottom: 2%;
+}
+
+#back{
+    margin-left: 1%;
+    margin-top: 1%;
+}
+
+#contenitoreMain{
+    text-align: center;
 }
 
 #mostraRisultato{
@@ -20,12 +34,16 @@ main {
 input[type="radio"] {
     display: block;
     margin: 0 auto;
-    position:sticky;
+    margin-left: 3%;
 }
 
-#immagine{
-    margin-left: 3%;
-    margin-right: 45%;
+#controlla{
+    margin-left: 1%;
+    margin-bottom: 1%;
+}
+
+#next{
+    margin-left: 1%;
 }
 
 #rispostaCorretta {

@@ -1,31 +1,31 @@
-h1{
-    text-align: center;
-}
 img {
-    width: 50%;
-    left:100%;
+  width: 50%;
+  left:100%;
 }
 
-input {
-    display: block;
-    margin: 0 auto;
-    width: 100px;
-    background-color: rgba(0, 0, 0, .85);
-    -webkit-backdrop-filter: saturate(180%) blur(20px);
-    backdrop-filter: saturate(180%) blur(20px);
-    color: white;
+#back{
+margin-left: 1%;
+margin-top: 1%;
 }
 
-div {
-  margin-left: 3%;
-  margin-right: 3%;
+img {
+width: auto;
+height: 300px;
+}
+
+#next{
+margin-bottom: 1%;
+}
+
+main {
+text-align: center;
 }
 
 h3 {
-  font-style: bold;
-  color: orangered;
+font-style: bold;
+color: rgb(229, 35, 21);
 }
 
 h4 {
-  font-style: italic;
+font-style: italic;
 }

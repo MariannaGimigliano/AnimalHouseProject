@@ -137,7 +137,7 @@ function drawServices(services){
     for (var i = 0; i < services.length; i++) {
       option = document.createElement("option");
       option.setAttribute("value", services[i].name);
-      option.innerHTML = services[i].name;
+      option.innerHTML = services[i].name + " (descrizione: " + services[i].description + ")";
     
       servicesInput.appendChild(option);
     }

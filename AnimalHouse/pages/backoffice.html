@@ -24,7 +24,7 @@
     <div class="row" style="background-color: rgba(0, 0, 0, .85);">
       <div class="col-4"></div>
       <div class="col-4" style=" text-align: center;">
-        <img src="images/animalhouse.png" alt="" style="height: 100px; text-align: center;">
+        <img src="images/animalhouse.png" alt="" style="height: 100px;">
       </div>
     </div>
 
@@ -36,43 +36,34 @@
     </header>
 
     <main>
-      <div class="position-relative overflow-hidden p-3 p-md-3 m-md-3 text-center bg-light">
-        <div class="col-md-5 p-lg-5 mx-auto my-5">
-          <h1 class="display-4 fw-normal">Back-Office</h1>
-          <p class="lead">Back-Office della piattaforma Animal House.</p>
+      <div class="d-md-flex flex-md-equal w-100 my-md-3 ps-md-3">
+          <div class="bg-light me-md-3 pt-3 px-3 pt-md-5 px-md-5 text-center overflow-hidden">
+              <div class="my-3 py-3">
+                  <h2 class="display-5">UTENTI</h2>
+                  <a class="btn btn-outline-secondary" href="/utentiback">Gestisci</a>
+              </div>
+          </div>
+          <div class="bg-light me-md-3 pt-3 px-3 pt-md-5 px-md-5 text-center overflow-hidden">
+              <div class="my-3 p-3">
+                  <h2 class="display-5">SERVIZI ONLINE E PRENOTAZIONI</h2>
+                  <a class="btn btn-outline-secondary" href="/serviziback">Gestisci</a>
+              </div>
+          </div>
         </div>
-
-        <div class="my-3 py-3">
-          <h2 class="display-5">Lista Utenti</h2>
-          <div id="listaUtenti"> </div>
-        </div>
-
-        <div class="my-3 py-3">
-          <h2 class="display-5">Lista Servizi</h2>
-          <div id="listaServizi"> </div>
-        </div>
-
-        <div class="my-3 py-3">
-          <h2 class="display-5">Lista Prenotazioni</h2>
-          <div id="listaPrenotazioni"> </div>
-        </div>
-
-        <div class="my-3 py-3">
-          <h2 class="display-5">Lista Post</h2>
-          <div id="listaPosts"> </div>
-        </div>
-
-
-        <div class="my-3 py-3">
-          <h2 class="display-5">Inserisci nuovo Servizio</h2>
-          <div class="form-floating">
-            <input id="newService" type="text" class="form-control">
-            <label for="service">Nuovo servizio</label>
-            <button class="w-100 btn btn-lg btn-primary" onclick="addService()" type="submit">Aggiungi Servizio</button>
+      <div class="d-md-flex flex-md-equal w-100 my-md-3 ps-md-3">
+          <div class="bg-light me-md-3 pt-3 px-3 pt-md-5 px-md-5 text-center overflow-hidden">
+              <div class="my-3 py-3">
+              <h2 class="display-5">BACHECA</h2>
+              <a class="btn btn-outline-secondary" href="/bachecaback">Gestisci</a>
+          </div>
+      </div>
+      <div class="bg-light me-md-3 pt-3 px-3 pt-md-5 px-md-5 text-center overflow-hidden">
+          <div class="my-3 p-3">
+              <h2 class="display-5">LEADERBOARD</h2>
+              <a class="btn btn-outline-secondary" href="/leaderboardback">Visualizza</a>
           </div>
         </div>
       </div>
-
     </main>
 
     <footer>

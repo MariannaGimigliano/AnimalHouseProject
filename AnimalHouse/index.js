@@ -30,24 +30,17 @@ app.use(express.static(__dirname));
 var client;
 
 async function main() {
-    console.log("server avviato");
+    console.log("Server avviato");
     const uri = "mongodb+srv://admin:admin@cluster0.ltitfkd.mongodb.net/?retryWrites=true&w=majority";
     client = new MongoClient(uri);
     try {
         await client.connect();
-        await listDatabases(client);
     } catch (e) {
         console.error(e);
     }
 }
 
 main().catch(console.error);
-
-async function listDatabases(client) {
-    databasesList = await client.db().admin().listDatabases();
-    console.log("Databases:");
-    databasesList.databases.forEach(db => console.log(` - ${db.name}`));
-};
 
 login = async function (req, res) {
     const db = client.db("progetto");
@@ -514,6 +507,30 @@ getInfo = async function (req, res) {
     res.sendFile(__dirname + "/pages/info.html");
 }
 
+getBachecaBack = async function (req, res) {
+    res.sendFile(__dirname + "/pages/bachecaBack.html");
+}
+
+getServiziBack = async function (req, res) {
+    res.sendFile(__dirname + "/pages/serviziBack.html");
+}
+
+getLeaderboardBack = async function (req, res) {
+    res.sendFile(__dirname + "/pages/leaderboardBack.html");
+}
+
+getUtentiBack = async function (req, res) {
+    res.sendFile(__dirname + "/pages/utentiBack.html");
+}
+
+getServizi = async function (req, res) {
+    res.sendFile(__dirname + "/pages/servizi.html");
+}
+
+getAnimali = async function (req, res) {
+    res.sendFile(__dirname + "/pages/animaliPreferiti.html");
+}
+
 getLeaderboard = async function (req, res) {
     res.sendFile(__dirname + "/pages/leaderboard.html");
 }
@@ -604,6 +621,18 @@ app.post("/addService", insertServiceInDB);
 app.get("/bacheca", getBacheca);
 
 app.get("/leaderboard", getLeaderboard);
+
+app.get("/servizi", getServizi);
+
+app.get("/animali", getAnimali);
+
+app.get("/bachecaback", getBachecaBack);
+
+app.get("/leaderboardback", getLeaderboardBack);
+
+app.get("/serviziback", getServiziBack);
+
+app.get("/utentiback", getUtentiBack);
 
 app.get("/info", getInfo);
 

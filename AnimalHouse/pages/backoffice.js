@@ -5,6 +5,8 @@ async function loadpage() {
     getServices();
     getBookings();
     getPosts();
+    getPoints("quiz");
+    getPoints("memory");
 }
 
 function getServices() {
@@ -33,7 +35,7 @@ function drawServices(services) {
         divP.setAttribute("class", "col");
 
         p = document.createElement("p");
-        p.innerHTML = services[i].name;
+        p.innerHTML = services[i].name + " | " + services[i].description;
 
         divP.appendChild(p);
 
@@ -322,7 +324,7 @@ function addService() {
             url: " ../addService",
             method: 'POST',
             contentType: 'application/json',
-            data: JSON.stringify({ "name": newService}),
+            data: JSON.stringify({ "name": newService, "description":description}),
 
             success: function () {
                 alert("servizio aggiunto con successo");
@@ -334,4 +336,50 @@ function addService() {
             }
         })
     }
+}
+
+function getPoints(gioco) {
+    $.ajax({
+        url: "../getPoints/" + gioco,
+        method: 'GET',
+        contentType: 'application/json',
+        dataType: 'json',
+
+        success: function (data) {
+            drawLeaderboard(data, gioco);
+        },
+        error: function (err) {
+            console.log("Errore, riprova")
+        }
+    })
+}
+
+function drawLeaderboard(punti, gioco) {
+    var leaderbordGioco = "leaderboard" + gioco;
+    var leaderboard = document.getElementById(leaderbordGioco);
+    leaderboard.innerHTML = "";
+
+    var table = document.createElement("table");
+
+    table.innerHTML = "<thead><tr><th>email</th><th>punti</th></tr></thead>";
+
+    var tbody = document.createElement("tbody");
+
+    for (var i = 0; i < punti.length; i++) {
+        var tr = document.createElement("tr");
+
+        var td = document.createElement("td");
+        var td1 = document.createElement("td");
+
+        td.innerHTML = punti[i].email;
+        td1.innerHTML = punti[i].points;
+
+        tr.appendChild(td);
+        tr.appendChild(td1);
+
+        tbody.appendChild(tr);
+
+    }
+    table.appendChild(tbody);
+    leaderboard.appendChild(table);
 }

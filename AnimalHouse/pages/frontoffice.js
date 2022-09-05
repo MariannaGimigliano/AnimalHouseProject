@@ -6,6 +6,7 @@ async function loadpage() {
   getAnimals();
   getServices();
   getBookings();
+  getPosts();
 }
 
 function getMemoryPoints() {
@@ -48,10 +49,10 @@ function leaderBoardQuiz(data){
   var div = document.getElementById("quizPoints");
   
   for(var i=0 ; i<data.length ; i++){
-  var user = document.createElement("p");
-  user.innerHTML = data[i].email + " :  "+ data[i].points;
+    var user = document.createElement("p");
+    user.innerHTML = "Utente: " + data[i].email + " Punteggio: " + data[i].points;
 
-  div.appendChild(user);
+    div.appendChild(user);
   }
 } 
 
@@ -60,7 +61,7 @@ function leaderBoardMemory(data){
   
   for(var i=0 ; i<data.length ; i++){
     var user = document.createElement("p");
-    user.innerHTML = data[i].email + " :  "+ data[i].points;
+    user.innerHTML = "Utente: " + data[i].email + " Punteggio: " + data[i].points;
 
     div.appendChild(user);
   }
@@ -208,10 +209,41 @@ function addPost() {
 
       success: function () {
         alert("Post aggiunto");
+        window.location.replace("/bacheca");
       },
       error: function (err) {
         console.log("C'è stato un errore");
       }
     })
+  }
+}
+
+function getPosts() {
+  let request = new XMLHttpRequest()
+  request.open('GET', "../getPosts", true);
+  request.send();
+  request.onload = () => {
+      if (request.status == 200) {
+          var postsJson = JSON.parse(request.response);
+          drawPosts(postsJson);
+      } else {
+          console.log("error:" + request.status);
+      }
+  }
+}
+
+function drawPosts(posts) {
+  var bachecaPosts = document.getElementById("bachecaPosts");
+
+  for (var i = 0; i < posts.length; i++) {
+      var div = document.createElement("div");
+      div.setAttribute("class", "rounded p-3 p-md-3 m-md-3 mb-10 text-center bg-info");
+
+      p = document.createElement("p");
+      p.innerHTML = posts[i].user + " ha pubblicato: " + posts[i].phrase;  
+
+      div.appendChild(p);
+
+      bachecaPosts.appendChild(div);
   }
 }

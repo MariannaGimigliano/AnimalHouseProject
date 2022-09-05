@@ -514,6 +514,10 @@ getInfo = async function (req, res) {
     res.sendFile(__dirname + "/pages/info.html");
 }
 
+getLeaderboard = async function (req, res) {
+    res.sendFile(__dirname + "/pages/leaderboard.html");
+}
+
 getFrontOffice = async function (req, res) {
     if (req.session.authenticated && req.session.admin == undefined) {
         res.sendFile(__dirname + "/pages/frontoffice.html");
@@ -598,6 +602,8 @@ app.post("/changePassword", changePassword);
 app.post("/addService", insertServiceInDB);
 
 app.get("/bacheca", getBacheca);
+
+app.get("/leaderboard", getLeaderboard);
 
 app.get("/info", getInfo);
 

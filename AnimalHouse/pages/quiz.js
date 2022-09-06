@@ -224,6 +224,7 @@ function changeNavButton() {
 
     var setRegFooter = document.getElementById("setRegisterFoot");
     setRegFooter.innerHTML = "";
+
   }
   if (session.admin) {
     var userNavButton = document.getElementById("userNavButton");

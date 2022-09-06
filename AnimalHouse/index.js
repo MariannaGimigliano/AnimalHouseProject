@@ -491,6 +491,10 @@ getFotoDivertentiVolpe = async function (req, res) {
     res.sendFile(__dirname + "/pages/fotoDivertentiVolpe.html");
 }
 
+getFotoDivertentiHound = async function (req, res) {
+    res.sendFile(__dirname + "/pages/fotoDivertentiHound.html");
+}
+
 getCuriositaAnimali = async function (req, res) {
     res.sendFile(__dirname + "/pages/curiositaAnimali.html");
 }
@@ -501,6 +505,10 @@ getMemory = async function (req, res) {
 
 getQuiz = async function (req, res) {
     res.sendFile(__dirname + "/pages/quiz.html");
+}
+//MD
+getQuizGenerico = async function (req, res) {
+    res.sendFile(__dirname + "/pages/quizGenerico.html");
 }
 
 getInfo = async function (req, res) {
@@ -568,11 +576,16 @@ app.get("/fotoDivertentiAnatre", getFotoDivertentiAnatre);
 
 app.get("/fotoDivertentiVolpe", getFotoDivertentiVolpe);
 
+app.get("/fotoDivertentiHound", getFotoDivertentiHound);
+
 app.get("/curiositaAnimali", getCuriositaAnimali);
 
 app.get("/memory", getMemory);
 
 app.get("/quiz", getQuiz);
+
+//MD
+app.get("/quizGenerico", getQuizGenerico);
 
 app.get("/logout", logout);
 

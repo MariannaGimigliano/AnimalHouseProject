@@ -72,7 +72,7 @@
 <script>
   function sendRequest() {
     let request = new XMLHttpRequest();
-    request.open("GET", "https://random-d.uk/api/v2/random");
+    request.open("GET", "http://placekitten.com/");
     request.send();
     request.onload = () => {
       if (request.status == 200) {

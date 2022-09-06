@@ -169,6 +169,18 @@ changePassword = async function (req, res) {
         res.status(401).end();
     }
 }
+//MD
+changeBooking = async function (req, res) {
+    const db = client.db("progetto");
+    const col = db.collection("bookings");
+
+    const up = await col.updateOne({ "_id": req.body.bookingId }, { $set: { "date": req.body.date } });
+    if (up.modifiedCount === 1) {
+        res.status(200).end();
+    } else {
+        res.status(401).end();
+    }
+}
 
 getBacheca = async function (req, res) {
     res.sendFile(__dirname + "/pages/bacheca.html");
@@ -407,6 +419,34 @@ removePost = async function (req, res) {
         res.status(401).end();
     }
 }
+//MD
+removePointMemory = async function (req, res) {
+    const db = client.db("progetto");
+    const col = db.collection("points_memory");
+
+    var id = req.body._id;
+
+    const del = await col.deleteOne({ "_id": ObjectId(id) });
+    if (del.deletedCount === 1) {
+        res.status(200).end();
+    } else {
+        res.status(401).end();
+    }
+}
+//MD
+removePointQuiz = async function (req, res) {
+    const db = client.db("progetto");
+    const col = db.collection("points_quiz");
+
+    var id = req.body._id;
+
+    const del = await col.deleteOne({ "_id": ObjectId(id) });
+    if (del.deletedCount === 1) {
+        res.status(200).end();
+    } else {
+        res.status(401).end();
+    }
+}
 
 removeUser = async function (req, res) {
     const db = client.db("progetto");
@@ -435,7 +475,7 @@ removeService = async function (req, res) {
         res.status(401).end();
     }
 }
-
+//MD
 removeBooking = async function (req, res) {
     const db = client.db("progetto");
     const col = db.collection("bookings");
@@ -449,7 +489,6 @@ removeBooking = async function (req, res) {
         res.status(401).end();
     }
 }
-
 
 getGames = async function (req, res) {
     res.sendFile(__dirname + "/pages/game.html");
@@ -626,6 +665,13 @@ app.post("/addPost", insertPostInDB);
 
 app.delete("/removePost", removePost);
 
+//MD
+app.delete("/removePointMemory", removePointMemory);
+
+//MD
+app.delete("/removePointQuiz", removePointQuiz);
+
+//MD
 app.delete("/removeBooking", removeBooking);
 
 app.delete("/removeService", removeService);
@@ -633,6 +679,8 @@ app.delete("/removeService", removeService);
 app.delete("/removeUser", removeUser);
 
 app.post("/changePassword", changePassword);
+
+app.post("/changeBooking", changeBooking);
 
 app.post("/addService", insertServiceInDB);
 

@@ -96,10 +96,29 @@ function drawBookings(bookingsData) {
         button.setAttribute("class", "btn btn-primary");
         button.addEventListener("click", removeBooking.bind(this, bookingsData[i]._id));
 
+        var divTextBox = document.createElement("div"); //div per contenere la text box
+        divTextBox.setAttribute("class", "col");
+
+        var textBox = document.createElement("input");
+        textBox.setAttribute("type","date");
+        textBox.setAttribute("id",bookingsData[i]._id); //come id diamo l'id della prenotazione
+
+        var divChangeButton = document.createElement("div");
+        divChangeButton.setAttribute("class","col");
+
+        var changeButton = document.createElement("button");
+        changeButton.innerHTML = "Cambia data"
+        changeButton.setAttribute("class", "btn btn-warning");
+        changeButton.addEventListener("click", changeBooking.bind(this, bookingsData[i]._id));
+    
         divButton.appendChild(button);
+        divChangeButton.appendChild(changeButton);
+        divTextBox.appendChild(textBox);
 
         div.appendChild(divP);
         div.appendChild(divButton);
+        div.appendChild(divTextBox);
+        div.appendChild(divChangeButton)
 
         divListaPrenotazioni.appendChild(div);
     }
@@ -135,11 +154,11 @@ function drawUsers(users) {
 
         divP.appendChild(p);
 
-        var divButton = document.createElement("div");
+        var divButton = document.createElement("div"); //bottone cancella
         divButton.setAttribute("class", "col");
 
 
-        var divTextBox = document.createElement("div");
+        var divTextBox = document.createElement("div"); //div per contenere la text box
         divTextBox.setAttribute("class", "col");
 
         var textBox = document.createElement("input");
@@ -237,7 +256,43 @@ function removePost(postId) {
         }
     })
 }
+//MD
+function removePointMemory(pointId) {
+    $.ajax({
+        url: "../removePointsMemory",
+        method: 'DELETE',
+        contentType: 'application/json',
+        data: JSON.stringify({
+            "_id": pointId,
+        }),
 
+        success: function (data) {
+            getPoints();
+        },
+        error: function (err) {
+            console.log("C'è stato un errore. Per cortesia riprova")
+        }
+    })
+}
+//MD
+function removePointQuiz(pointId) {
+    $.ajax({
+        url: "../removePointsQuiz",
+        method: 'DELETE',
+        contentType: 'application/json',
+        data: JSON.stringify({
+            "_id": pointId,
+        }),
+
+        success: function (data) {
+            getPoints();
+        },
+        error: function (err) {
+            console.log("C'è stato un errore. Per cortesia riprova")
+        }
+    })
+}
+//MD
 function removeBooking(bookingId) {
     $.ajax({
         url: "../removeBooking",
@@ -291,8 +346,30 @@ function removeUser(email) {
         }
     })
 }
+//MD
+function changeBooking(bookingId) {
+    var newData = document.getElementById(bookingId).value;
 
-function changePassword(userEmail ) {
+    $.ajax({
+        url: "../changeBooking",
+        method: 'POST',
+        contentType: 'application/json',
+        data: JSON.stringify({
+            "_id": bookingId,
+            "date": newData
+        }),
+        success: function () {
+            alert("Prenotazione cambiata : " + bookingId);
+        },
+        error: function (err) {
+
+            alert("Non è possibile modificare la prenotazione!");
+            console.log (newData);
+        }
+    })
+}
+
+function changePassword(userEmail) {
     var newPassword = document.getElementById(userEmail).value;
 
     $.ajax({
@@ -354,6 +431,7 @@ function getPoints(gioco) {
     })
 }
 
+//MD
 function drawLeaderboard(punti, gioco) {
     var leaderbordGioco = "leaderboard" + gioco;
     var leaderboard = document.getElementById(leaderbordGioco);
@@ -370,12 +448,20 @@ function drawLeaderboard(punti, gioco) {
 
         var td = document.createElement("td");
         var td1 = document.createElement("td");
+        var td2 = document.createElement("td");
+
+        var button = document.createElement("button");
+        button.innerHTML = "Cancella"
+        button.setAttribute("class", "btn btn-primary");
+        button.addEventListener("click", removePointMemory.bind(this, punti[i]._id));
 
         td.innerHTML = punti[i].email;
         td1.innerHTML = punti[i].points;
+        td2.appendChild(button);
 
         tr.appendChild(td);
         tr.appendChild(td1);
+        tr.appendChild(td2);
 
         tbody.appendChild(tr);
 

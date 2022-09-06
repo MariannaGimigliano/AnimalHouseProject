@@ -503,6 +503,10 @@ getMemory = async function (req, res) {
     res.sendFile(__dirname + "/pages/memory.html");
 }
 
+getMemoryGenerico = async function (req, res) {
+    res.sendFile(__dirname + "/pages/memoryGenerico.html");
+}
+
 getQuiz = async function (req, res) {
     res.sendFile(__dirname + "/pages/quiz.html");
 }
@@ -581,6 +585,8 @@ app.get("/fotoDivertentiHound", getFotoDivertentiHound);
 app.get("/curiositaAnimali", getCuriositaAnimali);
 
 app.get("/memory", getMemory);
+
+app.get("/memoryGenerico", getMemoryGenerico);
 
 app.get("/quiz", getQuiz);
 

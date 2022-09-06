@@ -52,6 +52,10 @@ function changeNavButton() {
         var setQuiz = document.getElementById("setQuiz");
         setQuiz.innerHTML = "Quiz";
         setQuiz.setAttribute("href", "/quiz");
+
+        var setMemory = document.getElementById("setMemory");
+        setMemory.innerHTML = "Memory";
+        setMemory.setAttribute("href", "/memory");
     }
     if (session.admin) {
         var userNavButton = document.getElementById("userNavButton");

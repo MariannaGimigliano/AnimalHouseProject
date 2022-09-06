@@ -1,4 +1,3 @@
-
 function sendRequest() {
   let request = new XMLHttpRequest();
   request.open("GET", "https://randomfox.ca/floof/");

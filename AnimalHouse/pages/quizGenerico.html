@@ -287,24 +287,4 @@
     
   }
 
-  function salvaPunti(){
-    var points = document.getElementById("punteggiospan").innerHTML;
-
-    console.log(points);
-    let request = new XMLHttpRequest();
-    request.open("POST", "/salvaPunti");
-    request.setRequestHeader("Content-Type", "application/json");
-    request.send( //nuova richiesta per salvare i punti con questi parametri
-      JSON.stringify({
-      "game": "quiz",
-      "points": parseInt(points)
-    }));
-    request.onload = () => {
-      if (request.status == 200) {
-        alert("punti aggiornati");
-        window.location.replace("/");
-      } 
-    }
-  }
-
 </script>

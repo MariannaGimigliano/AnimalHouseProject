@@ -506,7 +506,7 @@ getMemory = async function (req, res) {
 getQuiz = async function (req, res) {
     res.sendFile(__dirname + "/pages/quiz.html");
 }
-//MD
+
 getQuizGenerico = async function (req, res) {
     res.sendFile(__dirname + "/pages/quizGenerico.html");
 }
@@ -584,7 +584,6 @@ app.get("/memory", getMemory);
 
 app.get("/quiz", getQuiz);
 
-//MD
 app.get("/quizGenerico", getQuizGenerico);
 
 app.get("/logout", logout);

@@ -23,35 +23,35 @@ function getSessionInfo() {
 }
 
 function changeNavButton() {
-    if(!session.admin && session.authenticated){
+    if (!session.admin && session.authenticated) {
         var setHomeButton = document.getElementById("setHome");
-        setHomeButton.innerHTML ="FrontOffice";
-        setHomeButton.setAttribute("href","/frontOffice");
+        setHomeButton.innerHTML = "FrontOffice";
+        setHomeButton.setAttribute("href", "/frontOffice");
 
         var setLoginButton = document.getElementById("setLogin");
-        setLoginButton.innerHTML ="Logout";
-        setLoginButton.setAttribute("href","/logout");
+        setLoginButton.innerHTML = "Logout";
+        setLoginButton.setAttribute("href", "/logout");
 
         var setHomeFooter = document.getElementById("setHomeFoot");
-        setHomeFooter.innerHTML ="FrontOffice";
-        setHomeFooter.setAttribute("href","/frontOffice");
-        
+        setHomeFooter.innerHTML = "FrontOffice";
+        setHomeFooter.setAttribute("href", "/frontOffice");
+
         var setFooter = document.getElementById("setFoot");
-        setFooter.innerHTML ="";
+        setFooter.innerHTML = "";
 
         var setLoginFooter = document.getElementById("setLoginFoot");
-        setLoginFooter.innerHTML ="Logout";
-        setLoginFooter.setAttribute("href","/logout");
+        setLoginFooter.innerHTML = "Logout";
+        setLoginFooter.setAttribute("href", "/logout");
 
         var setAdminFooter = document.getElementById("setAdminLoginFoot");
-        setAdminFooter.innerHTML ="";
+        setAdminFooter.innerHTML = "";
 
         var setRegFooter = document.getElementById("setRegisterFoot");
-        setRegFooter.innerHTML ="";
+        setRegFooter.innerHTML = "";
     }
-    if(session.admin){
+    if (session.admin) {
         var userNavButton = document.getElementById("userNavButton");
-        userNavButton.innerHTML ="BackOffice";
-        userNavButton.setAttribute("href","/backoffice");
+        userNavButton.innerHTML = "BackOffice";
+        userNavButton.setAttribute("href", "/backoffice");
     }
 }

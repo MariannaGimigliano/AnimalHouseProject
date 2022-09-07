@@ -675,10 +675,10 @@ app.post("/addPost", insertPostInDB);
 app.delete("/removePost", removePost);
 
 //MD
-app.delete("/removePointMemory", removePointMemory);
+app.delete("/removePointsMemory", removePointMemory);
 
 //MD
-app.delete("/removePointQuiz", removePointQuiz);
+app.delete("/removePointsQuiz", removePointQuiz);
 
 //MD
 app.delete("/removeBooking", removeBooking);

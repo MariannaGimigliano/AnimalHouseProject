@@ -5,8 +5,8 @@ async function loadpage() {
     getServices();
     getBookings();
     getPosts();
-    getPoints("quiz");
-    getPoints("memory");
+    getMemoryPoints();
+    getQuizPoints();
 }
 
 // FUNZIONI SERVIZI
@@ -56,6 +56,20 @@ function drawServices(services) {
     }
 }
 
+function getBookings() {
+    let request = new XMLHttpRequest()
+    request.open('GET', "../getServices", true);
+    request.send();
+    request.onload = () => {
+        if (request.status == 200) {
+            var servicesJSON = JSON.parse(request.response);
+            drawServices(servicesJSON);
+        } else {
+            console.log("error:" + request.status);
+        }
+    }
+}
+/*
 /* aggiunge un nuovo servizio */
 function addService() {
     var newService = document.getElementById("newService").value;
@@ -95,6 +109,7 @@ function getBookings() {
         }
     })
 }
+*/
 
 /* disegna tutte le prenotazioni */
 function drawBookings(bookingsData) {
@@ -121,17 +136,25 @@ function drawBookings(bookingsData) {
 
         var divTextBox = document.createElement("div"); //div per contenere la text box
         divTextBox.setAttribute("class", "col");
-        var textBox = document.createElement("input");
-        textBox.setAttribute("type","date");
-        textBox.setAttribute("id",bookingsData[i]._id); //come id diamo l'id della prenotazione
 
-        var divChangeButton = document.createElement("div"); // bottone modifica data
-        divChangeButton.setAttribute("class","col");
+
+        var textBox = document.createElement("input");
+        textBox.setAttribute("type", "date");
+        textBox.setAttribute("name", "inputDate");
+        textBox.setAttribute("id", bookingsData[i]._id); //come id diamo l'id della prenotazione
+
+        let today = new Date().toISOString().slice(0, 10);
+        //console.log("la data di oggi è: " + today);
+        textBox.min = today;
+
+        var divChangeButton = document.createElement("div");
+        divChangeButton.setAttribute("class", "col");
+
         var changeButton = document.createElement("button");
-        changeButton.innerHTML = "Cambia data prenotazione"
+        changeButton.innerHTML = "Cambia data";
         changeButton.setAttribute("class", "btn btn-warning");
         changeButton.addEventListener("click", changeBooking.bind(this, bookingsData[i]._id));
-    
+
         divButton.appendChild(button);
         divChangeButton.appendChild(changeButton);
         divTextBox.appendChild(textBox);
@@ -173,27 +196,30 @@ function drawUsers(users) {
         var divP = document.createElement("div"); //div con elenco utenti
         divP.setAttribute("class", "col");
         p = document.createElement("p");
-        p.innerHTML = innerHTML = users[i].email + " - Animali preferiti : " + users[i].animals;
+        p.innerHTML = innerHTML = users[i].email + "| Animali preferiti : " + users[i].animals;
+
         divP.appendChild(p);
+
+        var divButton = document.createElement("div"); //div per contenere il bottone cancella
+        divButton.setAttribute("class", "col");
 
         var divTextBox = document.createElement("div"); //div per contenere la text box
         divTextBox.setAttribute("class", "col");
         var textBox = document.createElement("input");
-        textBox.setAttribute("type","text");
-        textBox.setAttribute("id",users[i].email);
+        textBox.setAttribute("type", "text");
+        textBox.setAttribute("id", users[i].email);
 
-        var divChangeButton = document.createElement("div"); //bottone cambia password
-        divChangeButton.setAttribute("class","col");
+        var divChangeButton = document.createElement("div");
+        divChangeButton.setAttribute("class", "col");
+
         var changeButton = document.createElement("button");
-        changeButton.innerHTML = "Modifica password"
+        changeButton.innerHTML = "Cambia password";
         changeButton.setAttribute("class", "btn btn-warning");
         changeButton.addEventListener("click", changePassword.bind(this, users[i].email));
-    
-        var divButton = document.createElement("div"); //bottone cancella
-        divButton.setAttribute("class", "col");
+
         var button = document.createElement("button");
-        button.innerHTML = "Cancella Utente"
-        button.setAttribute("class", "btn btn-danger");
+        button.innerHTML = "Cancella";
+        button.setAttribute("class", "btn btn-primary");
         button.addEventListener("click", removeUser.bind(this, users[i].email));
 
         var divButtonList = document.createElement("div"); //bottone cancella lista animali preferiti
@@ -211,8 +237,6 @@ function drawUsers(users) {
         div.appendChild(divP);
         div.appendChild(divTextBox);
         div.appendChild(divChangeButton)
-        div.appendChild(divButton);
-        div.appendChild(divButtonList);
 
         listaUtenti.appendChild(div);
     }
@@ -296,7 +320,7 @@ function getPosts() {
 function drawPosts(posts) {
     var listaPosts = document.getElementById("listaPosts");
     listaPosts.innerHTML = "";
-    
+
     for (var i = 0; i < posts.length; i++) {
         var div = document.createElement("div");
         div.setAttribute("class", "row");
@@ -305,7 +329,7 @@ function drawPosts(posts) {
         divP.setAttribute("class", "col");
         p = document.createElement("p");
         p.setAttribute("value", posts[i].phrase);
-        p.innerHTML = posts[i].user + " ha postato: " + posts[i].phrase;  
+        p.innerHTML = posts[i].user + " ha postato: " + posts[i].phrase;
 
         divP.appendChild(p);
 
@@ -356,7 +380,7 @@ function removePointMemory(pointId) {
         }),
 
         success: function (data) {
-            getPoints();
+            getMemoryPoints();
         },
         error: function (err) {
             console.log("C'è stato un errore. Per cortesia riprova")
@@ -374,7 +398,7 @@ function removePointQuiz(pointId) {
         }),
 
         success: function (data) {
-            getPoints();
+            getQuizPoints();
         },
         error: function (err) {
             console.log("C'è stato un errore. Per cortesia riprova")
@@ -437,45 +461,100 @@ function changeBooking(bookingId) {
         error: function (err) {
 
             alert("Non è possibile modificare la prenotazione!");
-            console.log (newData);
+            console.log(newData);
         }
     })
 }
 
 
+    $.ajax({
+        url: "../changePassword",
+        method: 'POST',
+        contentType: 'application/json',
+        data: JSON.stringify({
+            "userEmail": userEmail,
+            "password": newPassword
+        }),
 
 
+            alert("Questa password è attualmente in uso!");
+        }
+    })
+
+}
+
+function addService() {
+    var newService = document.getElementById("newService").value;
+
+    if (newService.length > 0) {
 
 function getPoints(gioco) {
+        $.ajax({
+            url: " ../addService",
+            method: 'POST',
+            contentType: 'application/json',
+            data: JSON.stringify({ "name": newService, "description": description }),
+
+            success: function () {
+                alert("servizio aggiunto con successo");
+                getServices();
+
+            },
+            error: function (err) {
+
+            }
+        })
+    }
+}
+//MD fino alla fine, in fondo
+
+/* ritorna il punteggio del memory per ogni utente */
+function getMemoryPoints() {
+    var urlreq = "../getPoints/memory";
     $.ajax({
-        url: "../getPoints/" + gioco,
+        url: urlreq,
         method: 'GET',
         contentType: 'application/json',
         dataType: 'json',
 
         success: function (data) {
-            drawLeaderboard(data, gioco);
+            leaderBoardMemory(data);
         },
         error: function (err) {
-            console.log("Errore, riprova")
+            console.log("C'è stato un errore. Per cortesia riprova")
         }
     })
 }
 
-//MD
-function drawLeaderboard(punti, gioco) {
-    var leaderbordGioco = "leaderboard" + gioco;
-    var leaderboard = document.getElementById(leaderbordGioco);
-    leaderboard.innerHTML = "";
+/* ritorna il punteggio del quiz per ogni utente */
+function getQuizPoints() {
+    var urlreq = "../getPoints/quiz";
+    $.ajax({
+        url: urlreq,
+        method: 'GET',
+        contentType: 'application/json',
+        dataType: 'json',
+
+        success: function (data) {
+            leaderBoardQuiz(data);
+        },
+        error: function (err) {
+            console.log("C'è stato un errore. Per cortesia riprova")
+        }
+    })
+}
+
+/* disegna la tabella della leaderboard per il quiz */
+function leaderBoardQuiz(data) {
+    var div = document.getElementById("leaderboardquiz");
+    div.innerHTML = "";
 
     var table = document.createElement("table");
     table.innerHTML = "<thead><tr><th>Utente</th><th>Punteggio</th></tr></thead>";
+    var tbody = document.createElement("tbody")
 
-    var tbody = document.createElement("tbody");
-
-    for (var i = 0; i < punti.length; i++) {
+    for (var i = 0; i < data.length; i++) {
         var tr = document.createElement("tr");
-
         var td = document.createElement("td");
         var td1 = document.createElement("td");
         var td2 = document.createElement("td");
@@ -483,10 +562,10 @@ function drawLeaderboard(punti, gioco) {
         var button = document.createElement("button");
         button.innerHTML = "Cancella"
         button.setAttribute("class", "btn btn-primary");
-        button.addEventListener("click", removePointMemory.bind(this, punti[i]._id));
+        button.addEventListener("click", removePointQuiz.bind(this, data[i]._id));
 
-        td.innerHTML = punti[i].email;
-        td1.innerHTML = punti[i].points;
+        td.innerHTML = data[i].email;
+        td1.innerHTML = data[i].points;
         td2.appendChild(button);
 
         tr.appendChild(td);
@@ -494,8 +573,41 @@ function drawLeaderboard(punti, gioco) {
         tr.appendChild(td2);
 
         tbody.appendChild(tr);
-
     }
     table.appendChild(tbody);
-    leaderboard.appendChild(table);
+    div.appendChild(table);
 }
+
+/* disegna la tabella della leaderboard per il memory */
+function leaderBoardMemory(data) {
+    var div = document.getElementById("leaderboardmemory");
+    div.innerHTML = "";
+
+    var table = document.createElement("table");
+    table.innerHTML = "<thead><tr><th>Utente</th><th>Punteggio</th></tr></thead>";
+    var tbody = document.createElement("tbody")
+
+    for (var i = 0; i < data.length; i++) {
+        var tr = document.createElement("tr");
+        var td = document.createElement("td");
+        var td1 = document.createElement("td");
+        var td2 = document.createElement("td");
+
+        var button = document.createElement("button");
+        button.innerHTML = "Cancella"
+        button.setAttribute("class", "btn btn-primary");
+        button.addEventListener("click", removePointMemory.bind(this, data[i]._id));
+
+        td.innerHTML = data[i].email;
+        td1.innerHTML = data[i].points;
+        td2.appendChild(button);
+
+        tr.appendChild(td);
+        tr.appendChild(td1);
+        tr.appendChild(td2);
+
+        tbody.appendChild(tr);
+    }
+    table.appendChild(tbody);
+    div.appendChild(table);
+} 

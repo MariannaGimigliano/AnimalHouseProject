@@ -56,20 +56,6 @@ function drawServices(services) {
     }
 }
 
-function getBookings() {
-    let request = new XMLHttpRequest()
-    request.open('GET', "../getServices", true);
-    request.send();
-    request.onload = () => {
-        if (request.status == 200) {
-            var servicesJSON = JSON.parse(request.response);
-            drawServices(servicesJSON);
-        } else {
-            console.log("error:" + request.status);
-        }
-    }
-}
-/*
 /* aggiunge un nuovo servizio */
 function addService() {
     var newService = document.getElementById("newService").value;
@@ -92,6 +78,25 @@ function addService() {
     }
 }
 
+/* elimina un servizio */
+function removeService(serviceId) {
+    $.ajax({
+        url: "../removeService",
+        method: 'DELETE',
+        contentType: 'application/json',
+        data: JSON.stringify({
+            "_id": serviceId,
+        }),
+
+        success: function (data) {
+            getServices();
+        },
+        error: function (err) {
+            console.log("C'è stato un errore. Per cortesia riprova")
+        }
+    })
+}
+
 //FUNZIONI PRENOTAZIONI
 /* ritorna tutte le prenotazioni */
 function getBookings() {
@@ -109,7 +114,6 @@ function getBookings() {
         }
     })
 }
-*/
 
 /* disegna tutte le prenotazioni */
 function drawBookings(bookingsData) {
@@ -136,25 +140,17 @@ function drawBookings(bookingsData) {
 
         var divTextBox = document.createElement("div"); //div per contenere la text box
         divTextBox.setAttribute("class", "col");
-
-
         var textBox = document.createElement("input");
-        textBox.setAttribute("type", "date");
-        textBox.setAttribute("name", "inputDate");
-        textBox.setAttribute("id", bookingsData[i]._id); //come id diamo l'id della prenotazione
+        textBox.setAttribute("type","date");
+        textBox.setAttribute("id",bookingsData[i]._id); //come id diamo l'id della prenotazione
 
-        let today = new Date().toISOString().slice(0, 10);
-        //console.log("la data di oggi è: " + today);
-        textBox.min = today;
-
-        var divChangeButton = document.createElement("div");
-        divChangeButton.setAttribute("class", "col");
-
+        var divChangeButton = document.createElement("div"); // bottone modifica data
+        divChangeButton.setAttribute("class","col");
         var changeButton = document.createElement("button");
-        changeButton.innerHTML = "Cambia data";
+        changeButton.innerHTML = "Cambia data prenotazione"
         changeButton.setAttribute("class", "btn btn-warning");
         changeButton.addEventListener("click", changeBooking.bind(this, bookingsData[i]._id));
-
+    
         divButton.appendChild(button);
         divChangeButton.appendChild(changeButton);
         divTextBox.appendChild(textBox);
@@ -166,6 +162,50 @@ function drawBookings(bookingsData) {
 
         divListaPrenotazioni.appendChild(div);
     }
+}
+
+//MD
+/* modifica una prenotazione */
+function changeBooking(bookingId) {
+    var newData = document.getElementById(bookingId).value;
+
+    $.ajax({
+        url: "../changeBooking",
+        method: 'POST',
+        contentType: 'application/json',
+        data: JSON.stringify({
+            "_id": bookingId,
+            "date": newData
+        }),
+        success: function () {
+            alert("Prenotazione cambiata : " + bookingId);
+        },
+        error: function (err) {
+
+            alert("Non è possibile modificare la prenotazione!");
+            console.log(newData);
+        }
+    })
+}
+
+//MD
+/* elimina una prenotazione */
+function removeBooking(bookingId) {
+    $.ajax({
+        url: "../removeBooking",
+        method: 'DELETE',
+        contentType: 'application/json',
+        data: JSON.stringify({
+            "_id": bookingId,
+        }),
+
+        success: function (data) {
+            getBookings();
+        },
+        error: function (err) {
+            console.log("C'è stato un errore. Per cortesia riprova")
+        }
+    })
 }
 
 // FUNZIONI UTENTI
@@ -196,30 +236,27 @@ function drawUsers(users) {
         var divP = document.createElement("div"); //div con elenco utenti
         divP.setAttribute("class", "col");
         p = document.createElement("p");
-        p.innerHTML = innerHTML = users[i].email + "| Animali preferiti : " + users[i].animals;
-
+        p.innerHTML = innerHTML = users[i].email + " - Animali preferiti : " + users[i].animals;
         divP.appendChild(p);
-
-        var divButton = document.createElement("div"); //div per contenere il bottone cancella
-        divButton.setAttribute("class", "col");
 
         var divTextBox = document.createElement("div"); //div per contenere la text box
         divTextBox.setAttribute("class", "col");
         var textBox = document.createElement("input");
-        textBox.setAttribute("type", "text");
-        textBox.setAttribute("id", users[i].email);
+        textBox.setAttribute("type","text");
+        textBox.setAttribute("id",users[i].email);
 
-        var divChangeButton = document.createElement("div");
-        divChangeButton.setAttribute("class", "col");
-
+        var divChangeButton = document.createElement("div"); //bottone cambia password
+        divChangeButton.setAttribute("class","col");
         var changeButton = document.createElement("button");
-        changeButton.innerHTML = "Cambia password";
+        changeButton.innerHTML = "Modifica password"
         changeButton.setAttribute("class", "btn btn-warning");
         changeButton.addEventListener("click", changePassword.bind(this, users[i].email));
-
+    
+        var divButton = document.createElement("div"); //bottone cancella
+        divButton.setAttribute("class", "col");
         var button = document.createElement("button");
-        button.innerHTML = "Cancella";
-        button.setAttribute("class", "btn btn-primary");
+        button.innerHTML = "Cancella Utente"
+        button.setAttribute("class", "btn btn-danger");
         button.addEventListener("click", removeUser.bind(this, users[i].email));
 
         var divButtonList = document.createElement("div"); //bottone cancella lista animali preferiti
@@ -237,6 +274,8 @@ function drawUsers(users) {
         div.appendChild(divP);
         div.appendChild(divTextBox);
         div.appendChild(divChangeButton)
+        div.appendChild(divButton);
+        div.appendChild(divButtonList);
 
         listaUtenti.appendChild(div);
     }
@@ -320,7 +359,7 @@ function getPosts() {
 function drawPosts(posts) {
     var listaPosts = document.getElementById("listaPosts");
     listaPosts.innerHTML = "";
-
+    
     for (var i = 0; i < posts.length; i++) {
         var div = document.createElement("div");
         div.setAttribute("class", "row");
@@ -329,7 +368,7 @@ function drawPosts(posts) {
         divP.setAttribute("class", "col");
         p = document.createElement("p");
         p.setAttribute("value", posts[i].phrase);
-        p.innerHTML = posts[i].user + " ha postato: " + posts[i].phrase;
+        p.innerHTML = posts[i].user + " ha postato: " + posts[i].phrase;  
 
         divP.appendChild(p);
 
@@ -366,148 +405,7 @@ function removePost(postId) {
     })
 }
 
-
-
-
-//MD
-function removePointMemory(pointId) {
-    $.ajax({
-        url: "../removePointsMemory",
-        method: 'DELETE',
-        contentType: 'application/json',
-        data: JSON.stringify({
-            "_id": pointId,
-        }),
-
-        success: function (data) {
-            getMemoryPoints();
-        },
-        error: function (err) {
-            console.log("C'è stato un errore. Per cortesia riprova")
-        }
-    })
-}
-//MD
-function removePointQuiz(pointId) {
-    $.ajax({
-        url: "../removePointsQuiz",
-        method: 'DELETE',
-        contentType: 'application/json',
-        data: JSON.stringify({
-            "_id": pointId,
-        }),
-
-        success: function (data) {
-            getQuizPoints();
-        },
-        error: function (err) {
-            console.log("C'è stato un errore. Per cortesia riprova")
-        }
-    })
-}
-//MD
-function removeBooking(bookingId) {
-    $.ajax({
-        url: "../removeBooking",
-        method: 'DELETE',
-        contentType: 'application/json',
-        data: JSON.stringify({
-            "_id": bookingId,
-        }),
-
-        success: function (data) {
-            getBookings();
-        },
-        error: function (err) {
-            console.log("C'è stato un errore. Per cortesia riprova")
-        }
-    })
-}
-
-function removeService(serviceId) {
-    $.ajax({
-        url: "../removeService",
-        method: 'DELETE',
-        contentType: 'application/json',
-        data: JSON.stringify({
-            "_id": serviceId,
-        }),
-
-        success: function (data) {
-            getServices();
-        },
-        error: function (err) {
-            console.log("C'è stato un errore. Per cortesia riprova")
-        }
-    })
-}
-
-
-//MD
-function changeBooking(bookingId) {
-    var newData = document.getElementById(bookingId).value;
-
-    $.ajax({
-        url: "../changeBooking",
-        method: 'POST',
-        contentType: 'application/json',
-        data: JSON.stringify({
-            "_id": bookingId,
-            "date": newData
-        }),
-        success: function () {
-            alert("Prenotazione cambiata : " + bookingId);
-        },
-        error: function (err) {
-
-            alert("Non è possibile modificare la prenotazione!");
-            console.log(newData);
-        }
-    })
-}
-
-
-    $.ajax({
-        url: "../changePassword",
-        method: 'POST',
-        contentType: 'application/json',
-        data: JSON.stringify({
-            "userEmail": userEmail,
-            "password": newPassword
-        }),
-
-
-            alert("Questa password è attualmente in uso!");
-        }
-    })
-
-}
-
-function addService() {
-    var newService = document.getElementById("newService").value;
-
-    if (newService.length > 0) {
-
-function getPoints(gioco) {
-        $.ajax({
-            url: " ../addService",
-            method: 'POST',
-            contentType: 'application/json',
-            data: JSON.stringify({ "name": newService, "description": description }),
-
-            success: function () {
-                alert("servizio aggiunto con successo");
-                getServices();
-
-            },
-            error: function (err) {
-
-            }
-        })
-    }
-}
-//MD fino alla fine, in fondo
-
+// FUNZIONI GIOCHI
 /* ritorna il punteggio del memory per ogni utente */
 function getMemoryPoints() {
     var urlreq = "../getPoints/memory";
@@ -611,3 +509,43 @@ function leaderBoardMemory(data) {
     table.appendChild(tbody);
     div.appendChild(table);
 } 
+
+//MD
+/*  azzera i punti del memory */
+function removePointMemory(pointId) {
+    $.ajax({
+        url: "../removePointsMemory",
+        method: 'DELETE',
+        contentType: 'application/json',
+        data: JSON.stringify({
+            "_id": pointId,
+        }),
+
+        success: function (data) {
+            getMemoryPoints();
+        },
+        error: function (err) {
+            console.log("C'è stato un errore. Per cortesia riprova")
+        }
+    })
+}
+
+//MD
+/*  azzera i punti del quiz */
+function removePointQuiz(pointId) {
+    $.ajax({
+        url: "../removePointsQuiz",
+        method: 'DELETE',
+        contentType: 'application/json',
+        data: JSON.stringify({
+            "_id": pointId,
+        }),
+
+        success: function (data) {
+            getQuizPoints();
+        },
+        error: function (err) {
+            console.log("C'è stato un errore. Per cortesia riprova")
+        }
+    })
+}

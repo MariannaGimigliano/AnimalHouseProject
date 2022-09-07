@@ -1,7 +1,15 @@
+document.onload = loadpage();
+var session;
+
+async function loadpage() {
+    getSessionInfo();
+}
+
 var primagirata = false;
 var cartauno; var cartadue;
 var divuno; var divdue;
 
+/* ritorna i dati dall'API */
 function sendRequest() {
     let request = new XMLHttpRequest();
     request.open("GET", "https://dog.ceo/api/breeds/image/random");
@@ -11,13 +19,13 @@ function sendRequest() {
             var caniJSON = JSON.parse(request.response);
             disegnaCane(caniJSON);
             disegnaCane(caniJSON);
-            //console.log(caniJSON);
-        } else { //errore
+        } else { 
             console.log(`error ${request.status} ${request.statusText}`);
         }
     }
 }
 
+/* disegna le immagini provenienti dall'API per creare il memory */
 function disegnaCane(caniJSON) {
   console.log(caniJSON);
   var div = document.getElementsByClassName("empty")[0];
@@ -130,8 +138,6 @@ function checkVittoria(){
 }
 
 function salvaPunti(){
-  
-
   let request = new XMLHttpRequest();
   request.open("POST", "/salvaPunti");
   request.setRequestHeader("Content-Type", "application/json");
@@ -148,14 +154,7 @@ function salvaPunti(){
   }
 }
 
-
-document.onload = loadpage();
-var session;
-
-async function loadpage() {
-    getSessionInfo();
-}
-
+/* controlla se è aperta una sessione utente */
 function getSessionInfo() {
     let request = new XMLHttpRequest();
     request.open('GET', "/cookieSession", true);
@@ -173,36 +172,29 @@ function getSessionInfo() {
     };
 }
 
+/* cambia dinamicamente nav e footer se c'è un utente loggato */
 function changeNavButton() {
-    if(!session.admin && session.authenticated){
-        var setHomeButton = document.getElementById("setHome");
-        setHomeButton.innerHTML ="FrontOffice";
-        setHomeButton.setAttribute("href","/frontOffice");
+  if(session.authenticated){
+      var setHomeButton = document.getElementById("setHome");
+      setHomeButton.innerHTML ="FrontOffice";
+      setHomeButton.setAttribute("href","/frontOffice");
 
-        var setLoginButton = document.getElementById("setLogin");
-        setLoginButton.innerHTML ="Logout";
-        setLoginButton.setAttribute("href","/logout");
+      var setLoginButton = document.getElementById("setLogin");
+      setLoginButton.innerHTML ="Logout";
+      setLoginButton.setAttribute("href","/logout");
 
-        var setHomeFooter = document.getElementById("setHomeFoot");
-        setHomeFooter.innerHTML ="FrontOffice";
-        setHomeFooter.setAttribute("href","/frontOffice");
-        
-        var setFooter = document.getElementById("setFoot");
-        setFooter.innerHTML ="";
+      var setHomeFooter = document.getElementById("setHomeFoot");
+      setHomeFooter.innerHTML ="FrontOffice";
+      setHomeFooter.setAttribute("href","/frontOffice");
+      
+      var setFooter = document.getElementById("setFoot");
+      setFooter.innerHTML ="";
 
-        var setLoginFooter = document.getElementById("setLoginFoot");
-        setLoginFooter.innerHTML ="Logout";
-        setLoginFooter.setAttribute("href","/logout");
+      var setLoginFooter = document.getElementById("setLoginFoot");
+      setLoginFooter.innerHTML ="Logout";
+      setLoginFooter.setAttribute("href","/logout");
 
-        var setAdminFooter = document.getElementById("setAdminLoginFoot");
-        setAdminFooter.innerHTML ="";
-
-        var setRegFooter = document.getElementById("setRegisterFoot");
-        setRegFooter.innerHTML ="";
-    }
-    if(session.admin){
-        var userNavButton = document.getElementById("userNavButton");
-        userNavButton.innerHTML ="BackOffice";
-        userNavButton.setAttribute("href","/backoffice");
-    }
+      var setRegFooter = document.getElementById("setRegisterFoot");
+      setRegFooter.innerHTML ="";
+  }
 }

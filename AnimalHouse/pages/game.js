@@ -5,6 +5,7 @@ async function loadpage() {
     getSessionInfo();
 }
 
+/* controlla se è aperta una sessione utente */
 function getSessionInfo() {
     let request = new XMLHttpRequest();
     request.open('GET', "/cookieSession", true);
@@ -22,8 +23,9 @@ function getSessionInfo() {
     };
 }
 
+/* cambia dinamicamente nav e footer se c'è un utente loggato */
 function changeNavButton() {
-    if (!session.admin && session.authenticated) {
+    if (session.authenticated) {
         var setHomeButton = document.getElementById("setHome");
         setHomeButton.innerHTML = "FrontOffice";
         setHomeButton.setAttribute("href", "/frontOffice");
@@ -43,23 +45,13 @@ function changeNavButton() {
         setLoginFooter.innerHTML = "Logout";
         setLoginFooter.setAttribute("href", "/logout");
 
-        var setAdminFooter = document.getElementById("setAdminLoginFoot");
-        setAdminFooter.innerHTML = "";
-
         var setRegFooter = document.getElementById("setRegisterFoot");
         setRegFooter.innerHTML = "";
 
         var setQuiz = document.getElementById("setQuiz");
-        setQuiz.innerHTML = "Quiz";
         setQuiz.setAttribute("href", "/quiz");
 
         var setMemory = document.getElementById("setMemory");
-        setMemory.innerHTML = "Memory";
         setMemory.setAttribute("href", "/memory");
-    }
-    if (session.admin) {
-        var userNavButton = document.getElementById("userNavButton");
-        userNavButton.innerHTML = "BackOffice";
-        userNavButton.setAttribute("href", "/backoffice");
     }
 }

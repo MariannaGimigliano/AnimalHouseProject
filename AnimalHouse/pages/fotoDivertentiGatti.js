@@ -1,4 +1,11 @@
+document.onload = loadpage();
+var session;
 
+async function loadpage() {
+  getSessionInfo();
+}
+
+/* ritorna i dati dall'API */
 function sendRequest() {
   let request = new XMLHttpRequest();
   request.open("GET", "https://api.thecatapi.com/v1/images/search");
@@ -7,13 +14,13 @@ function sendRequest() {
     if (request.status == 200) {
       var gattiJSON = JSON.parse(request.response);
       mostraFoto(gattiJSON);
-      //console.log(gattiJSON);
-    } else { //errore
+    } else { 
       console.log(`error ${request.status} ${request.statusText}`);
     }
   }
 }
 
+/* disegna le info provenienti dall'API */
 function mostraFoto(gattiJSON) {
   var arrayLength = gattiJSON.length;
   var containerImmagine = document.getElementById("containerImmagine");
@@ -29,13 +36,7 @@ function mostraFoto(gattiJSON) {
   }
 }
 
-document.onload = loadpage();
-var session;
-
-async function loadpage() {
-  getSessionInfo();
-}
-
+/* controlla se è aperta una sessione utente */
 function getSessionInfo() {
   let request = new XMLHttpRequest();
   request.open('GET', "/cookieSession", true);
@@ -53,8 +54,9 @@ function getSessionInfo() {
   };
 }
 
+/* cambia dinamicamente nav e footer se c'è un utente loggato */
 function changeNavButton() {
-  if (!session.admin && session.authenticated) {
+  if (session.authenticated) {
     var setHomeButton = document.getElementById("setHome");
     setHomeButton.innerHTML = "FrontOffice";
     setHomeButton.setAttribute("href", "/frontOffice");
@@ -74,15 +76,7 @@ function changeNavButton() {
     setLoginFooter.innerHTML = "Logout";
     setLoginFooter.setAttribute("href", "/logout");
 
-    var setAdminFooter = document.getElementById("setAdminLoginFoot");
-    setAdminFooter.innerHTML = "";
-
     var setRegFooter = document.getElementById("setRegisterFoot");
     setRegFooter.innerHTML = "";
-  }
-  if (session.admin) {
-    var userNavButton = document.getElementById("userNavButton");
-    userNavButton.innerHTML = "BackOffice";
-    userNavButton.setAttribute("href", "/backoffice");
   }
 }

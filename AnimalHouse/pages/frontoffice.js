@@ -174,7 +174,7 @@ function drawServices(services){
     for (var i = 0; i < services.length; i++) {
       option = document.createElement("option");
       option.setAttribute("value", services[i].name);
-      option.innerHTML = services[i].name + " - Descrizione: " + services[i].description + ".";
+      option.innerHTML = services[i].name + " - Descrizione: " + services[i].description;
     
       servicesInput.appendChild(option);
     }
@@ -277,7 +277,7 @@ function drawPosts(posts) {
 
   for (var i = 0; i < posts.length; i++) {
       var div = document.createElement("div");
-      div.setAttribute("class", "rounded p-3 p-md-3 m-md-3 mb-10 text-center bg-info");
+      div.setAttribute("class", "rounded p-3 p-md-3 m-md-3 mb-10 text-center bg-warning");
 
       p = document.createElement("p");
       p.innerHTML = posts[i].user + " ha pubblicato: " + posts[i].phrase;  

@@ -5,7 +5,6 @@ const { MongoClient, ObjectId } = require('mongodb');
 const bodyParser = require("body-parser");
 const session = require("express-session");
 const cookieParser = require("cookie-parser");
-const password = "admin";
 
 const app = express()
 

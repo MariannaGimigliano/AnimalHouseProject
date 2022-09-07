@@ -1,4 +1,11 @@
+document.onload = loadpage();
+var session;
 
+async function loadpage() {
+  getSessionInfo();
+}
+
+/* ritorna i dati dall'API */
 function sendRequest() {
   let request = new XMLHttpRequest();
   request.open("GET", "https://zoo-animal-api.herokuapp.com/animals/rand/");
@@ -15,8 +22,8 @@ function sendRequest() {
   }
 }
 
+/* disegna le info provenienti dall'API */
 function mostraInfo(animaliJSON) {
-  var arrayLength = animaliJSON.length;
   var container = document.getElementById("container");
   var imm = document.getElementById("immagine");
 
@@ -34,7 +41,6 @@ function mostraInfo(animaliJSON) {
   var p9 = document.createElement("p");
   var p10 = document.createElement("p");
   var p11 = document.createElement("p");
-  var p12 = document.createElement("p");
   var immagine = document.createElement("img");
 
   h3.innerHTML = "Animale: " + animaliJSON.name;
@@ -62,16 +68,9 @@ function mostraInfo(animaliJSON) {
   container.appendChild(p11);
 
   imm.appendChild(immagine);
-
 }
 
-document.onload = loadpage();
-var session;
-
-async function loadpage() {
-  getSessionInfo();
-}
-
+/* controlla se è aperta una sessione utente */
 function getSessionInfo() {
   let request = new XMLHttpRequest();
   request.open('GET', "/cookieSession", true);
@@ -89,8 +88,9 @@ function getSessionInfo() {
   };
 }
 
+/* cambia dinamicamente nav e footer se c'è un utente loggato */
 function changeNavButton() {
-  if (!session.admin && session.authenticated) {
+  if (session.authenticated) {
     var setHomeButton = document.getElementById("setHome");
     setHomeButton.innerHTML = "FrontOffice";
     setHomeButton.setAttribute("href", "/frontOffice");
@@ -110,15 +110,7 @@ function changeNavButton() {
     setLoginFooter.innerHTML = "Logout";
     setLoginFooter.setAttribute("href", "/logout");
 
-    var setAdminFooter = document.getElementById("setAdminLoginFoot");
-    setAdminFooter.innerHTML = "";
-
     var setRegFooter = document.getElementById("setRegisterFoot");
     setRegFooter.innerHTML = "";
-  }
-  if (session.admin) {
-    var userNavButton = document.getElementById("userNavButton");
-    userNavButton.innerHTML = "BackOffice";
-    userNavButton.setAttribute("href", "/backoffice");
   }
 }

@@ -19,7 +19,7 @@
   <script type="text/javascript" src="pages/quiz.js"></script>
 </head>
 
-<body>
+<body onload="sendRequest()">
 
   <div class="row" style="background-color: rgba(0, 0, 0, .85);">
     <div class="col-4"></div>
@@ -42,8 +42,6 @@
   </div>
 
   <main id="contenitoreMain">
-
-    <input id="inizia" class="btn btn-outline-secondary" type="button" value="Inizia il quiz" onclick="sendRequest()">
 
     <input id="next" class="btn btn-outline-secondary" type="button" style="display:none" value="Prossima domanda"
       onclick="sendRequest()">
@@ -72,7 +70,7 @@
     value="Salva punteggio e termina quiz" onclick="salvaPunti()">
 
   <!-- bottone per terminare il gioco se non sei registrato -->
-  <input id="termina" class="btn btn-outline-secondary" type="button" style="display:none" value="Termina quiz"
+  <input id="termina" class="btn btn-outline-secondary" type="button" style="display:block" value="Termina quiz"
     onclick="terminaQuiz()">
 
   <footer>

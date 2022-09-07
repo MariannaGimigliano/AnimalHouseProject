@@ -80,10 +80,6 @@ function mostraDomanda(animaliJSON) {
   immagine.src = animaliJSON.image_link;
   containerImmagine.appendChild(immagine);
 
-  //nascondiamo il bottone inizia il quiz 
-  var btn1 = document.getElementById("inizia");
-  btn1.style.display = "none";
-
   //mostro pulsante per passare alla domanda successiva
   var btn2 = document.getElementById("next");
   btn2.style.display = "block";
@@ -91,18 +87,6 @@ function mostraDomanda(animaliJSON) {
   //mostro pulsante per controllare la risposta data
   var btn3 = document.getElementById("controlla");
   btn3.style.display = "block";
-
-  //mostro pulsante per terminare la partita se l'utente non è loggato
-  var btn4 = document.getElementById("termina");
-  btn4.style.display = "block";
-
-  if (session.authenticated){
-    //nascondo pulsante per terminare la partita se l'utente è loggato
-    btn4.style.display = "none";
-
-    var btnSalvaPunti = document.getElementById("salvapunti");
-    btnSalvaPunti.style.display = "block"; //mostro il bottone per salvare i punti e terminare il quiz se l'utente effettua il login
-  }
 
   //salviamo il nome dell'animale dell'immagine
   var nomeAnimaleCorretto = animaliJSON.name;
@@ -137,14 +121,13 @@ function mostraDomanda(animaliJSON) {
     } else if (valoreRadioSelezionato.trim() != nomeAnimaleCorretto.trim()) {
       console.log("RISPOSTA SELEZIONATA NON CORRETTA");
       console.log("Punteggio: " + punteggio);
-
-    } 
+    }
 
     containerRisultato.innerHTML = "";
     p.innerHTML = 'Il tuo punteggio è: <span id = "punteggiospan">' + punteggio + '</span>';
     containerRisultato.appendChild(p);
 
-  });
+  }, false);
 
 }
 
@@ -206,7 +189,7 @@ function terminaQuiz() {
 
   var h4 = document.createElement("h4");
   h4.innerHTML = "Il quiz è terminato! Torna nella home dei giochi e scopri gli altri nostri giochi!";
-  
+
   var containerRisultato = document.getElementById("mostraRisultato");
   containerRisultato.appendChild(h4);
 
@@ -257,6 +240,22 @@ function changeNavButton() {
 
     var setRegFooter = document.getElementById("setRegisterFoot");
     setRegFooter.innerHTML = "";
-    }
+
+    var btn4 = document.getElementById("termina");
+    //nascondo pulsante per terminare la partita se l'utente è loggato
+    btn4.style.display = "none";
+
+    var btnSalvaPunti = document.getElementById("salvapunti");
+    btnSalvaPunti.style.display = "block"; //mostro il bottone per salvare i punti e terminare il quiz se l'utente effettua il login
+
+  }
+  /*
+  if (!session.authenticated) {
+    //mostro pulsante per terminare la partita se l'utente non è loggato
+    var btn4 = document.getElementById("termina");
+    btn4.style.display = "block";
+  }
+  */
+
 }
 

@@ -181,7 +181,7 @@ function changeBooking(bookingId) {
             "date": newData
         }),
         success: function () {
-            alert("Prenotazione cambiata : " + bookingId);
+            alert("Prenotazione modificata con successo!");
             window.location.replace("/serviziback");
         },
         error: function (err) {
@@ -338,7 +338,7 @@ function changePassword(userEmail) {
             "password": newPassword
         }),
         success: function () {
-            alert("Password cambiata per l'utente : " + userEmail);
+            alert("Password cambiata con successo!");
             window.location.replace("/utentiback");
         },
         error: function (err) {
@@ -357,7 +357,7 @@ function removeAnimalList(email) {
             "email": email,
         }),
         success: function () {
-            alert("Lista rimossa");
+            alert("Lista animali preferiti rimossa con successo!");
             getUsers();
         },
         error: function (err) {

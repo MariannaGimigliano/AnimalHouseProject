@@ -99,7 +99,7 @@ function removeService(serviceId) {
 
 //FUNZIONI PRENOTAZIONI
 /* ritorna tutte le prenotazioni */
-function getBookings() {
+/*function getBookings() {
     $.ajax({
         url: "../getBookings",
         method: 'GET',
@@ -113,6 +113,22 @@ function getBookings() {
             console.log("C'è stato un errore. Per cortesia riprova")
         }
     })
+}
+*/
+
+//MD
+function getBookings() {
+    let request = new XMLHttpRequest()
+    request.open('GET', "../getBookings", true);
+    request.send();
+    request.onload = () => {
+        if (request.status == 200) {
+            var bookingsJson = JSON.parse(request.response);
+            drawBookings(bookingsJson);
+        } else {
+            console.log("error:" + request.status);
+        }
+    }
 }
 
 /* disegna tutte le prenotazioni */
@@ -153,7 +169,7 @@ function drawBookings(bookingsData) {
         var changeButton = document.createElement("button");
         changeButton.innerHTML = "Cambia data prenotazione"
         changeButton.setAttribute("class", "btn btn-warning");
-        changeButton.addEventListener("click", changeBooking.bind(this, bookingsData[i]._id));
+        changeButton.addEventListener("click", changeBooking.bind(this, bookingsData[i]._id, bookingsData[i].date));
     
         divButton.appendChild(button);
         divChangeButton.appendChild(changeButton);
@@ -170,8 +186,9 @@ function drawBookings(bookingsData) {
 
 //MD
 /* modifica una prenotazione */
-function changeBooking(bookingId) {
-    var newData = document.getElementById(bookingId).value;        //NON FUNZIONA
+function changeBooking(bookingId, newData) {
+    var newData = document.getElementById(bookingId).value;        
+    console.log(newData);
 
     $.ajax({
         url: "../changeBooking",
@@ -182,7 +199,8 @@ function changeBooking(bookingId) {
             "date": newData
         }),
         success: function () {
-            alert("Prenotazione cambiata : " + bookingId);
+            alert("Prenotazione cambiata : " + bookingId + newData);
+            getBookings();
         },
         error: function (err) {
             alert("Non è possibile modificare la prenotazione!");

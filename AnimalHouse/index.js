@@ -159,12 +159,18 @@ changeBooking = async function (req, res) {
     const db = client.db("progetto");
     const col = db.collection("bookings");
 
-    const up = await col.updateOne({ "_id": req.body.bookingId }, { $set: { "date": req.body.newData } });
-    if (up.modifiedCount === 1) {
-        res.status(200).end();
-    } else {
-        res.status(401).end();
+    var id = req.body._id;
+    var data = req.body.date;
+    console.log(data);
+
+    try {
+        const up = await col.updateOne({ "_id": ObjectId(id) }, { $set: { "date": data } }, {upsert: true});
+    } catch (e) {
+        console.log(e);
+        res.status(500);
+        res.send("error");
     }
+    res.status(200).end();
 }
 
 getBacheca = async function (req, res) {

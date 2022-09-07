@@ -48,14 +48,15 @@
     <input id="next" class="btn btn-outline-secondary" type="button" style="display:none" value="Prossima domanda"
       onclick="sendRequest()">
 
-      <div id="domanda"></div>
+    <div id="domanda"></div>
 
-      <div id="immagine"></div>
+    <div id="immagine"></div>
 
     <form>
       <div id="risposte"></div>
 
-      <button id="controlla" class="btn btn-outline-secondary" type="submit" style="display:none">Controlla risposta</button>
+      <button id="controlla" class="btn btn-outline-secondary" type="submit" style="display:none">Controlla
+        risposta</button>
     </form>
 
     <div id="rispostaSelezionata"></div>
@@ -66,30 +67,35 @@
 
   <div id="mostraRisultato"></div>
 
+  <!-- bottone per terminare il gioco e salvare i punteggi se sei registrato -->
   <input id="salvapunti" class="btn btn-outline-secondary" type="button" style="display:none"
     value="Salva punteggio e termina quiz" onclick="salvaPunti()">
 
-    <footer>
-      <div class="row">
-        <div class="col-6 col-md">
-          <ul class="list text-small">
-            <h5>Pagine</h5>
-            <li><a class="link-secondary" id="setHomeFoot" href="/">Homepage</a></li>
-            <li><a class="link-secondary" href="/games">Giochi</a></li>
-            <li><a class="link-secondary" id="setFoot" href="/info">Scopri chi siamo</a></li>
-  
-          </ul>
-        </div>
-        <div class="col-6 col-md">
-          <ul class="list text-small">
-            <h5>Utente</h5>
-            <li><a class="link-secondary" id="setLoginFoot" href="/loginPage">Login</a></li>
-            <li><a class="link-secondary" id="setRegisterFoot" href="/registerPage">Registrazione</a></li>
-          </ul>
-        </div>
+  <!-- bottone per terminare il gioco se non sei registrato -->
+  <input id="termina" class="btn btn-outline-secondary" type="button" style="display:none" value="Termina quiz"
+    onclick="terminaQuiz()">
+
+  <footer>
+    <div class="row">
+      <div class="col-6 col-md">
+        <ul class="list text-small">
+          <h5>Pagine</h5>
+          <li><a class="link-secondary" id="setHomeFoot" href="/">Homepage</a></li>
+          <li><a class="link-secondary" href="/games">Giochi</a></li>
+          <li><a class="link-secondary" id="setFoot" href="/info">Scopri chi siamo</a></li>
+
+        </ul>
       </div>
-    </footer>
-  
+      <div class="col-6 col-md">
+        <ul class="list text-small">
+          <h5>Utente</h5>
+          <li><a class="link-secondary" id="setLoginFoot" href="/loginPage">Login</a></li>
+          <li><a class="link-secondary" id="setRegisterFoot" href="/registerPage">Registrazione</a></li>
+        </ul>
+      </div>
+    </div>
+  </footer>
+
 
 </body>
 

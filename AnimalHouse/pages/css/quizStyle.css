@@ -42,8 +42,9 @@ input[type="radio"] {
     margin-bottom: 1%;
 }
 
-#next, #salvapunti{
+#next, #salvapunti, #termina{
     margin-left: 1%;
+    margin-top: 1%;
 }
 
 #rispostaCorretta {

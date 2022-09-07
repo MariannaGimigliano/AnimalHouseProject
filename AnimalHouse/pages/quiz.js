@@ -92,9 +92,17 @@ function mostraDomanda(animaliJSON) {
   var btn3 = document.getElementById("controlla");
   btn3.style.display = "block";
 
-  //mostro pulsante per salvare i punti
-  var btn4 = document.getElementById("salvapunti");
+  //mostro pulsante per terminare la partita se l'utente non è loggato
+  var btn4 = document.getElementById("termina");
   btn4.style.display = "block";
+
+  if (session.authenticated){
+    //nascondo pulsante per terminare la partita se l'utente è loggato
+    btn4.style.display = "none";
+
+    var btnSalvaPunti = document.getElementById("salvapunti");
+    btnSalvaPunti.style.display = "block"; //mostro il bottone per salvare i punti e terminare il quiz se l'utente effettua il login
+  }
 
   //salviamo il nome dell'animale dell'immagine
   var nomeAnimaleCorretto = animaliJSON.name;
@@ -130,12 +138,13 @@ function mostraDomanda(animaliJSON) {
       console.log("RISPOSTA SELEZIONATA NON CORRETTA");
       console.log("Punteggio: " + punteggio);
 
-    }
+    } 
+
     containerRisultato.innerHTML = "";
     p.innerHTML = 'Il tuo punteggio è: <span id = "punteggiospan">' + punteggio + '</span>';
     containerRisultato.appendChild(p);
 
-  }, false);
+  });
 
 }
 
@@ -181,6 +190,31 @@ function salvaPunti() {
   }
 }
 
+function terminaQuiz() {
+  console.log("Quiz terminato");
+
+  // pulsante per passare alla domanda successiva
+  var btn2 = document.getElementById("next");
+  btn2.style.display = "none";
+
+  // pulsante per controllare la risposta data
+  var btn3 = document.getElementById("controlla");
+  btn3.style.display = "none";
+
+  var containerMain = document.getElementById("contenitoreMain");
+  containerMain.innerHTML = "";
+
+  var h4 = document.createElement("h4");
+  h4.innerHTML = "Il quiz è terminato! Torna nella home dei giochi e scopri gli altri nostri giochi!";
+  
+  var containerRisultato = document.getElementById("mostraRisultato");
+  containerRisultato.appendChild(h4);
+
+  var btnTermina = document.getElementById("termina");
+  btnTermina.style.display = "none"; //nascono il bottone quando mostro la schermata finale
+
+}
+
 /* controlla se è aperta una sessione utente */
 function getSessionInfo() {
   let request = new XMLHttpRequest();
@@ -223,5 +257,6 @@ function changeNavButton() {
 
     var setRegFooter = document.getElementById("setRegisterFoot");
     setRegFooter.innerHTML = "";
-  }
+    }
 }
+

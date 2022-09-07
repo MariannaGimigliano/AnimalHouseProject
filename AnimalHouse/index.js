@@ -159,7 +159,7 @@ changeBooking = async function (req, res) {
     const db = client.db("progetto");
     const col = db.collection("bookings");
 
-    const up = await col.updateOne({ "_id": req.body.bookingId }, { $set: { "date": req.body.date } });
+    const up = await col.updateOne({ "_id": req.body.bookingId }, { $set: { "date": req.body.newData } });
     if (up.modifiedCount === 1) {
         res.status(200).end();
     } else {
@@ -317,7 +317,7 @@ removeAnimalList = async function (req, res) {
     var email = req.body.email;
 
     try {
-    const up = await col.updateOne({ "email": email }, { $unset: { animals: ""}});
+        const up = await col.updateOne({ "email": email }, { $unset: { animals: ""}});
     } catch (e) {
         console.log(e);
         res.status(500);
@@ -401,34 +401,54 @@ removePost = async function (req, res) {
     }
 }
 
-//MD
 removePointMemory = async function (req, res) {
     const db = client.db("progetto");
     const col = db.collection("points_memory");
 
     var id = req.body._id;
 
-    const del = await col.deleteOne({ "_id": ObjectId(id) });
-    if (del.deletedCount === 1) {
-        res.status(200).end();
-    } else {
-        res.status(401).end();
+    try {
+        const up = await col.updateOne(
+            {
+                "_id": ObjectId(id)
+            },
+            {
+                $set: { "points": 0 },
+            },
+            {
+                upsert: true
+            });
+    } catch (e) {
+        console.log(e);
+        res.status(500);
+        res.send("error");
     }
+    res.status(200).end();
 }
 
-//MD
 removePointQuiz = async function (req, res) {
     const db = client.db("progetto");
     const col = db.collection("points_quiz");
 
     var id = req.body._id;
 
-    const del = await col.deleteOne({ "_id": ObjectId(id) });
-    if (del.deletedCount === 1) {
-        res.status(200).end();
-    } else {
-        res.status(401).end();
+    try {
+        const up = await col.updateOne(
+            {
+                "_id": ObjectId(id)
+            },
+            {
+                $set: { "points": 0 },
+            },
+            {
+                upsert: true
+            });
+    } catch (e) {
+        console.log(e);
+        res.status(500);
+        res.send("error");
     }
+    res.status(200).end();
 }
 
 removeUser = async function (req, res) {
@@ -458,7 +478,7 @@ removeService = async function (req, res) {
         res.status(401).end();
     }
 }
-//MD
+
 removeBooking = async function (req, res) {
     const db = client.db("progetto");
     const col = db.collection("bookings");
@@ -472,6 +492,20 @@ removeBooking = async function (req, res) {
         res.status(401).end();
     }
 }
+
+/*removeBookingByService = async function (req, res) {
+    const db = client.db("progetto");
+    const col = db.collection("bookings");
+
+    var serviceName = req.body.service;
+
+    const del = await col.deleteOne({ "service": serviceName });
+    if (del.deletedCount === 1) {
+        res.status(200).end();
+    } else {
+        res.status(401).end();
+    }
+}*/
 
 getGames = async function (req, res) {
     res.sendFile(__dirname + "/pages/game.html");
@@ -643,14 +677,13 @@ app.post("/addPost", insertPostInDB);
 
 app.delete("/removePost", removePost);
 
-//MD
-app.delete("/removePointsMemory", removePointMemory);
+app.post("/removePointsMemory", removePointMemory);
 
-//MD
-app.delete("/removePointsQuiz", removePointQuiz);
+app.post("/removePointsQuiz", removePointQuiz);
 
-//MD
 app.delete("/removeBooking", removeBooking);
+
+//app.delete("/removeBookingByService", removeBookingByService);
 
 app.delete("/removeService", removeService);
 

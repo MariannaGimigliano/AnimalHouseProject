@@ -47,6 +47,7 @@ function drawServices(services) {
         button.innerHTML = "Elimina"
         button.setAttribute("class", "btn btn-danger");
         button.addEventListener("click", removeService.bind(this, services[i]._id));
+        //button.addEventListener("click", removeBookingByService.bind(this, services[i]._id));
 
         divButton.appendChild(button);
         div.appendChild(divP);
@@ -87,7 +88,6 @@ function removeService(serviceId) {
         data: JSON.stringify({
             "_id": serviceId,
         }),
-
         success: function (data) {
             getServices();
         },
@@ -167,7 +167,7 @@ function drawBookings(bookingsData) {
 //MD
 /* modifica una prenotazione */
 function changeBooking(bookingId) {
-    var newData = document.getElementById(bookingId).value;
+    var newData = document.getElementById(bookingId).value;        //NON FUNZIONA
 
     $.ajax({
         url: "../changeBooking",
@@ -181,7 +181,6 @@ function changeBooking(bookingId) {
             alert("Prenotazione cambiata : " + bookingId);
         },
         error: function (err) {
-
             alert("Non è possibile modificare la prenotazione!");
             console.log(newData);
         }
@@ -189,6 +188,25 @@ function changeBooking(bookingId) {
 }
 
 //MD
+/* elimina una prenotazione */
+/*function removeBookingByService(bookingId) {                      //NON FUNZIONA
+    var serviceName = document.getElementById(bookingId).value;
+    $.ajax({
+        url: "../removeBookingByService",
+        method: 'DELETE',
+        contentType: 'application/json',
+        data: JSON.stringify({
+            "service": serviceName,
+        }),
+        success: function (data) {
+            alert("Prenotazioni eliminate");
+        },
+        error: function (err) {
+            alert("Prenotazioni non eliminate");
+        }
+    })
+}*/
+
 /* elimina una prenotazione */
 function removeBooking(bookingId) {
     $.ajax({
@@ -463,8 +481,8 @@ function leaderBoardQuiz(data) {
         var td2 = document.createElement("td");
 
         var button = document.createElement("button");
-        button.innerHTML = "Cancella"
-        button.setAttribute("class", "btn btn-primary");
+        button.innerHTML = "Azzera"
+        button.setAttribute("class", "btn btn-warning");
         button.addEventListener("click", removePointQuiz.bind(this, data[i]._id));
 
         td.innerHTML = data[i].email;
@@ -497,8 +515,8 @@ function leaderBoardMemory(data) {
         var td2 = document.createElement("td");
 
         var button = document.createElement("button");
-        button.innerHTML = "Cancella"
-        button.setAttribute("class", "btn btn-primary");
+        button.innerHTML = "Azzera"
+        button.setAttribute("class", "btn btn-warning");
         button.addEventListener("click", removePointMemory.bind(this, data[i]._id));
 
         td.innerHTML = data[i].email;
@@ -515,12 +533,11 @@ function leaderBoardMemory(data) {
     div.appendChild(table);
 } 
 
-//MD
 /*  azzera i punti del memory */
 function removePointMemory(pointId) {
     $.ajax({
         url: "../removePointsMemory",
-        method: 'DELETE',
+        method: 'POST',
         contentType: 'application/json',
         data: JSON.stringify({
             "_id": pointId,
@@ -535,12 +552,11 @@ function removePointMemory(pointId) {
     })
 }
 
-//MD
 /*  azzera i punti del quiz */
 function removePointQuiz(pointId) {
     $.ajax({
         url: "../removePointsQuiz",
-        method: 'DELETE',
+        method: 'POST',
         contentType: 'application/json',
         data: JSON.stringify({
             "_id": pointId,

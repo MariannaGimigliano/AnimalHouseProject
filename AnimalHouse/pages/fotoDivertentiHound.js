@@ -42,7 +42,7 @@ function mostraInfo(houndJSON) {
   basset.innerHTML = "Hound Basset";
   containerBasset.appendChild(basset);
 
-  for (var i = 239; i < 243; i++) { //414
+  for (var i = 239; i < 242; i++) { //414
     var immagine = document.createElement("img");
     immagine.src = houndJSON.message[i];
     //console.log(houndJSON.message[i]);
@@ -54,7 +54,7 @@ function mostraInfo(houndJSON) {
   blood.innerHTML = "Hound Blood";
   containerBlood.appendChild(blood);
 
-  for (var i = 414; i < 418; i++) { //601
+  for (var i = 414; i < 417; i++) { //601
     var immagine = document.createElement("img");
     immagine.src = houndJSON.message[i];
     //console.log(houndJSON.message[i]);
@@ -78,7 +78,7 @@ function mostraInfo(houndJSON) {
   ibizan.innerHTML = "Hound Ibizan";
   containerIbizan.appendChild(ibizan);
 
-  for (var i = 758; i < 762; i++) { //946
+  for (var i = 758; i < 761; i++) { //946
     var immagine = document.createElement("img");
     immagine.src = houndJSON.message[i];
     //console.log(houndJSON.message[i]);
@@ -102,7 +102,7 @@ function mostraInfo(houndJSON) {
   walker.innerHTML = "Hound Walker";
   containerWalker.appendChild(walker);
 
-  for (var i = 948; i < 952; i++) { //arrayLength
+  for (var i = 948; i < 951; i++) { //arrayLength
     var immagine = document.createElement("img");
     immagine.src = houndJSON.message[i];
     //console.log(houndJSON.message[i]);

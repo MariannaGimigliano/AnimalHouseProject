@@ -63,6 +63,8 @@ function mostraDomanda(animaliJSON) {
   var rispostaCorretta = document.getElementById("rispostaCorretta");
   var rispostaSelezionata = document.getElementById("rispostaSelezionata");
   var containerMain = document.getElementById("contenitoreMain");
+  var messaggioindovinato = document.getElementById("msgindovinato");
+
 
   //resetto i contenitori ogni volta che clicco il bottone
   containerDomanda.innerHTML = "";
@@ -117,6 +119,8 @@ function mostraDomanda(animaliJSON) {
       console.log("RISPOSTA SELEZIONATA CORRETTA");
       punteggio++;
       console.log("Punteggio: " + punteggio);
+
+      messaggioindovinato.classList.remove("nascosta");
 
     } else if (valoreRadioSelezionato.trim() != nomeAnimaleCorretto.trim()) {
       console.log("RISPOSTA SELEZIONATA NON CORRETTA");

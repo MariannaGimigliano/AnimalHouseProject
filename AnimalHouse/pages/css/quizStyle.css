@@ -54,3 +54,8 @@ input[type="radio"] {
 h4 {
     text-align: center;
 }
+
+.nascosta {
+    visibility: hidden;
+    position: absolute;
+  }

@@ -9,9 +9,9 @@ async function loadpage() {
   getPosts();
 }
 
+/* ritorna il punteggio del memory per ogni utente */
 function getMemoryPoints() {
   var urlreq = "../getPoints/memory";
-
   $.ajax({
     url: urlreq,
     method: 'GET',
@@ -27,9 +27,9 @@ function getMemoryPoints() {
   })
 }
 
+/* ritorna il punteggio del quiz per ogni utente */
 function getQuizPoints() {
   var urlreq = "../getPoints/quiz" ;
-
   $.ajax({
     url: urlreq,
     method: 'GET',
@@ -44,29 +44,60 @@ function getQuizPoints() {
     }
   })
 }
-
+ 
+/* disegna la tabella della leaderboard per il quiz */ 
 function leaderBoardQuiz(data){
   var div = document.getElementById("quizPoints");
+  div.innerHTML = "";
   
-  for(var i=0 ; i<data.length ; i++){
-    var user = document.createElement("p");
-    user.innerHTML = "Utente: " + data[i].email + " Punteggio: " + data[i].points;
+  var table = document.createElement("table");
+  table.innerHTML = "<thead><tr><th>Utente</th><th>Punteggio</th></tr></thead>";
+  var tbody = document.createElement("tbody")
 
-    div.appendChild(user);
+  for(var i=0 ; i<data.length ; i++){
+    var tr = document.createElement("tr");
+    var td = document.createElement("td");
+    var td1 = document.createElement("td");
+
+    td.innerHTML = data[i].email;
+    td1.innerHTML = data[i].points;
+
+    tr.appendChild(td);
+    tr.appendChild(td1);
+
+    tbody.appendChild(tr);
   }
+  table.appendChild(tbody);
+  div.appendChild(table);
 } 
 
+/* disegna la tabella della leaderboard per il memory */ 
 function leaderBoardMemory(data){
   var div = document.getElementById("memoryPoints");
+  div.innerHTML = "";
   
-  for(var i=0 ; i<data.length ; i++){
-    var user = document.createElement("p");
-    user.innerHTML = "Utente: " + data[i].email + " Punteggio: " + data[i].points;
+  var table = document.createElement("table");
+  table.innerHTML = "<thead><tr><th>Utente</th><th>Punteggio</th></tr></thead>";
+  var tbody = document.createElement("tbody")
 
-    div.appendChild(user);
+  for(var i=0 ; i<data.length ; i++){
+    var tr = document.createElement("tr");
+    var td = document.createElement("td");
+    var td1 = document.createElement("td");
+
+    td.innerHTML = data[i].email;
+    td1.innerHTML = data[i].points;
+
+    tr.appendChild(td);
+    tr.appendChild(td1);
+
+    tbody.appendChild(tr);
   }
+  table.appendChild(tbody);
+  div.appendChild(table);
 } 
 
+/* aggiunge il nuovo animale preferito dato in input */
 function insertAnimal() {
   var animal = document.getElementById("inputAnimal").value;
 
@@ -81,6 +112,7 @@ function insertAnimal() {
 
       success: function () {
         alert("Animale aggiunto");
+        window.location.replace("/animali");
       },
       error: function (err) {
         console.log("C'è stato un errore");
@@ -89,6 +121,7 @@ function insertAnimal() {
   }
 }
 
+/* ritona gli animali preferiti dell'utente */
 function getAnimals() {
   $.ajax({
       url: "../getAnimals",
@@ -98,9 +131,11 @@ function getAnimals() {
 
       success: function (data) {
           if (data[0].animals == undefined) {
-              //nessun animale preferito
+            //nessun animale preferito
           }
-          else { drawAnimals(data[0].animals); }  
+          else { 
+            drawAnimals(data[0].animals); 
+          }  
       },
       error: function (err) {
           console.log("C'è stato un errore. Per cortesia riprova")
@@ -108,8 +143,8 @@ function getAnimals() {
   });
 }
 
+/* disegna il div degli animali preferiti */
 function drawAnimals(animalName){
-
     var divLista = document.getElementById("listaAnimaliPreferiti");  
     var animal = document.createElement("p");
     animal.innerHTML = animalName;
@@ -117,6 +152,7 @@ function drawAnimals(animalName){
     divLista.appendChild(animal);
 }
 
+/* ritona tutti i servizi della piattaforma */
 function getServices() {
     let request = new XMLHttpRequest()
     request.open('GET', "../getServices", true);
@@ -131,24 +167,25 @@ function getServices() {
     }
 }
 
+/* disegna l'option con i servizi prenotabili */
 function drawServices(services){
     var servicesInput = document.getElementById("servicesInput");
 
     for (var i = 0; i < services.length; i++) {
       option = document.createElement("option");
       option.setAttribute("value", services[i].name);
-      option.innerHTML = services[i].name + " (descrizione: " + services[i].description + ")";
+      option.innerHTML = services[i].name + " - Descrizione: " + services[i].description + ".";
     
       servicesInput.appendChild(option);
     }
 }
 
+/* aggiunge il nuovo servizio dato in input */
 function addBooking() {
   var service = document.getElementById("servicesInput").value;
   var date = document.getElementById("inputDate").value;
 
   if (service !="Scegli il servizio" && date != "") {
-
     $.ajax({
       url: "../addBooking",
       method: 'POST',
@@ -157,9 +194,9 @@ function addBooking() {
         "service": service,
         "date": date
       }),
-
       success: function (responseText) {
           alert("Prenotato!")
+          window.location.replace("/servizi");
       },
       error: function (err) {
           alert("Impossibile effettuare la prenotazione");
@@ -168,13 +205,13 @@ function addBooking() {
   }
 }
 
+/* ritona i servizi prenotati dall'utente */
 function getBookings() {
   $.ajax({
       url: "../getBookingsByUser",
       method: 'GET',
       contentType: 'application/json',
       dataType: 'json',
-
       success: function (data) {
           drawBookings(data);
       },
@@ -184,17 +221,18 @@ function getBookings() {
   })
 }
 
+/* disegna il div con i servizi prenotati */
 function drawBookings(bookingsData){
-
     var divListaPrenotazioni = document.getElementById("listaPrenotazioni");
     for(var i=0 ; i<bookingsData.length ; i++){
     var bookings = document.createElement("p");
-    bookings.innerHTML = bookingsData[i].service + "    Il giorno : "+ bookingsData[i].date;
+    bookings.innerHTML = bookingsData[i].service + " - in data: "+ bookingsData[i].date;
 
     divListaPrenotazioni.appendChild(bookings);
   }
 }
 
+/* aggiunge il nuovo post dato in input */
 function addPost() {
   var post = document.getElementById("inputPost").value;
 
@@ -218,6 +256,7 @@ function addPost() {
   }
 }
 
+/* ritona tutti i post della bacheca */
 function getPosts() {
   let request = new XMLHttpRequest()
   request.open('GET', "../getPosts", true);
@@ -232,6 +271,7 @@ function getPosts() {
   }
 }
 
+/* disegna il div con i post della bacheca */
 function drawPosts(posts) {
   var bachecaPosts = document.getElementById("bachecaPosts");
 

@@ -438,8 +438,7 @@ function drawLeaderboard(punti, gioco) {
     leaderboard.innerHTML = "";
 
     var table = document.createElement("table");
-
-    table.innerHTML = "<thead><tr><th>email</th><th>punti</th></tr></thead>";
+    table.innerHTML = "<thead><tr><th>Utente</th><th>Punteggio</th></tr></thead>";
 
     var tbody = document.createElement("tbody");
 

@@ -181,7 +181,7 @@ function changeBooking(bookingId) {
             "date": newData
         }),
         success: function () {
-            alert("Prenotazione cambiata : " + bookingId);
+            alert("La prenotazione con codice " + bookingId + "è  stata cambiata nella seguente data " + newData);
             window.location.replace("/serviziback");
         },
         error: function (err) {

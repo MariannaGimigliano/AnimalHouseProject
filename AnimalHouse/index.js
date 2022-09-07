@@ -218,6 +218,7 @@ insertServiceInDB = async function (req, res) {
 
     let newServiceJSON = {
         "name": req.body.name,
+        "description": req.body.description
     }
 
     try {
@@ -461,6 +462,20 @@ removeUser = async function (req, res) {
     }
 }
 
+removeAnimalList = async function (req, res) {
+    const db = client.db("progetto");
+    const col = db.collection("users");
+
+    var email = req.body.email;
+
+    const up = await col.updateOne({ "email": email }, {$unset: {words:1}} , {multi: true});
+    if (up.modifiedCount === 1) {
+        res.status(200).end();
+    } else {
+        res.status(401).end();
+    }
+}
+
 removeService = async function (req, res) {
     const db = client.db("progetto");
     const col = db.collection("services");
@@ -586,12 +601,7 @@ getLeaderboard = async function (req, res) {
 }
 
 getFrontOffice = async function (req, res) {
-    if (req.session.authenticated && req.session.admin == undefined) {
-        res.sendFile(__dirname + "/pages/frontoffice.html");
-    }
-    else {
-        res.status(401).end();
-    }
+    res.sendFile(__dirname + "/pages/frontoffice.html");
 }
 
 app.get("/games", getGames);
@@ -678,6 +688,8 @@ app.delete("/removeService", removeService);
 app.delete("/removeUser", removeUser);
 
 app.post("/changePassword", changePassword);
+
+app.post("/removeAnimalList", removeAnimalList);
 
 app.post("/changeBooking", changeBooking);
 

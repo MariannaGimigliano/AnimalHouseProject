@@ -9,6 +9,7 @@ async function loadpage() {
   getPosts();
 }
 
+// FUNZIONI GIOCHI
 /* ritorna il punteggio del memory per ogni utente */
 function getMemoryPoints() {
   var urlreq = "../getPoints/memory";
@@ -97,6 +98,7 @@ function leaderBoardMemory(data){
   div.appendChild(table);
 } 
 
+// FUNZIONI ANIMALI PREFERITI
 /* aggiunge il nuovo animale preferito dato in input */
 function insertAnimal() {
   var animal = document.getElementById("inputAnimal").value;
@@ -152,6 +154,7 @@ function drawAnimals(animalName){
     divLista.appendChild(animal);
 }
 
+// FUNZIONI SERVIZI
 /* ritona tutti i servizi della piattaforma */
 function getServices() {
     let request = new XMLHttpRequest()
@@ -180,6 +183,7 @@ function drawServices(services){
     }
 }
 
+// FUNZIONI PRENOTAZIONI
 /* aggiunge il nuovo servizio dato in input */
 function addBooking() {
   var service = document.getElementById("servicesInput").value;
@@ -232,6 +236,7 @@ function drawBookings(bookingsData){
   }
 }
 
+// FUNZIONI BACHECA
 /* aggiunge il nuovo post dato in input */
 function addPost() {
   var post = document.getElementById("inputPost").value;

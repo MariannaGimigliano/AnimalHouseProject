@@ -44,12 +44,14 @@
                     <input id="newService" type="text" class="form-control" placeholder="Nuovo servizio">
                     <label for="newService">Nuovo servizio</label>
                     <input style="margin-top: 10px;" id="description" type="text" class="form-control" placeholder="Descrizione">
+                    <label for="description">Descrizione</label>
                     <a style="margin-top: 10px;" class="btn btn-outline-secondary" onclick="addService()">Aggiungi Servizio</a>
                 </div>
             </div>
 
             <div class="position-relative overflow-hidden p-3 p-md-3 m-md-3 text-center bg-light">
                 <h2 class="display-5">Lista Servizi</h2>
+                <p style="margin-bottom: 20px; color: red;">Attenzione! Se elimini un servizio verranno eliminate tutte le prenotazioni collegate.</p>
                 <div id="listaServizi"> </div>
             </div>
 

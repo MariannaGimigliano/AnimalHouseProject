@@ -236,8 +236,13 @@ function drawUsers(users) {
         var divP = document.createElement("div"); //div con elenco utenti
         divP.setAttribute("class", "col");
         p = document.createElement("p");
-        p.innerHTML = innerHTML = users[i].email + " - Animali preferiti : " + users[i].animals;
-        divP.appendChild(p);
+        if (users[i].animals == undefined) {
+            p.innerHTML = innerHTML = users[i].email + " - Animali preferiti : nessun animale inserito";
+            divP.appendChild(p);
+        } else {
+            p.innerHTML = innerHTML = users[i].email + " - Animali preferiti : " + users[i].animals;
+            divP.appendChild(p);
+        }
 
         var divTextBox = document.createElement("div"); //div per contenere la text box
         divTextBox.setAttribute("class", "col");
@@ -264,7 +269,7 @@ function drawUsers(users) {
         var buttonList = document.createElement("button");
         buttonList.innerHTML = "Rimuovi Lista Animali"
         buttonList.setAttribute("class", "btn btn-danger");
-        button.addEventListener("click", removeAnimalList.bind(this, users[i].email));
+        buttonList.addEventListener("click", removeAnimalList.bind(this, users[i].email));
 
         divButton.appendChild(button);
         divChangeButton.appendChild(changeButton);
@@ -329,12 +334,12 @@ function removeAnimalList(email) {
         data: JSON.stringify({
             "email": email,
         }),
-        success: function (data) {
+        success: function () {
+            alert("Lista rimossa");
             getUsers();
-            console.log("ok")
         },
         error: function (err) {
-            console.log("C'è stato un errore. Per cortesia riprova")
+            alert("Lista non rimossa");
         }
     })
 }

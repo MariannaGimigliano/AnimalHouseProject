@@ -44,10 +44,8 @@ main().catch(console.error);
 login = async function (req, res) {
     const db = client.db("progetto");
     const col = db.collection("users");
-
     var userEmail = req.body.email;
     var hashedPsw = req.body.password;
-
     var query = {
         "email": userEmail,
         "password": hashedPsw
@@ -58,17 +56,14 @@ login = async function (req, res) {
     }
 
     var p = await col.findOne(query);
-
     if (p == null) {
         res.status(401).end();
         console.log("# user wrong login: " + userEmail);
     } else {
         res.status(200);
-
         req.session.authenticated = true;
         req.session.user = userEmail;
         console.log("# user successfully login: " + userEmail);
-
         res.end();
     }
 }
@@ -76,10 +71,8 @@ login = async function (req, res) {
 adminLogin = async function (req, res) {
     const db = client.db("progetto");
     const col = db.collection("admins");
-
     var userEmail = req.body.email;
     var hashedPsw = req.body.password;
-
     var query = {
         "email": userEmail,
         "password": hashedPsw
@@ -94,23 +87,18 @@ adminLogin = async function (req, res) {
     if (p == null) {
         res.status(401).end();
         console.log("# admin wrong login: " + userEmail);
-
     } else {
         res.status(200);
-
-        //aggiorniamo la sessione
         req.session.authenticated = true;
         req.session.admin = true;
         req.session.user = userEmail;
         console.log("# admin successfully login: " + userEmail);
-
         res.end();
     }
 }
 
 logout = async function (req, res) {
     req.session.authenticated = false;
-
     if (req.session.admin) {
         req.session.admin = undefined;
     }
@@ -121,22 +109,20 @@ cookieSession = async function (req, res) {
     if (req.session.authenticated) {
         res.send(req.session);
     }
-    else { res.status(401).end() };
+    else { 
+        res.status(401).end() 
+    };
 }
 
 register = async function (req, res) {
     const db = client.db("progetto");
     const col = db.collection("users");
-
     let newUserJSON = {
         "email": req.body.email,
         "password": req.body.password
     }
 
-    console.log("nuovo utente registrato : " + req.body.email);
-
     const user = await col.findOne({ "email": req.body.email });
-
     if (user == null) {
         try {
             const p = await col.insertOne(newUserJSON);
@@ -154,7 +140,6 @@ register = async function (req, res) {
         res.status(200);
         res.send("UTENTE ESISTENTE");
     }
-
 }
 
 changePassword = async function (req, res) {
@@ -168,6 +153,7 @@ changePassword = async function (req, res) {
         res.status(401).end();
     }
 }
+
 //MD
 changeBooking = async function (req, res) {
     const db = client.db("progetto");
@@ -186,12 +172,7 @@ getBacheca = async function (req, res) {
 }
 
 getBackOffice = async function (req, res) {
-    if (req.session.admin) {
-        res.sendFile(__dirname + "/pages/backoffice.html");
-    }
-    else {
-        res.status(401).end();
-    }
+    res.sendFile(__dirname + "/pages/backoffice.html");
 }
 
 getUsersFromDB = async function (req, res) {
@@ -220,7 +201,6 @@ insertServiceInDB = async function (req, res) {
         "name": req.body.name,
         "description": req.body.description
     }
-
     try {
         const p = await col.insertOne(newServiceJSON);
         res.status(200).end();
@@ -258,8 +238,6 @@ insertBooking = async function (req, res) {
     const db = client.db("progetto");
     const col = db.collection("bookings");
 
-    console.log(req.body);
-
     let bookingJSON = {
         "user": req.session.user,
         "service": req.body.service,
@@ -287,7 +265,6 @@ getPostsFromDB = async function (req, res) {
 insertPostInDB = async function (req, res) {
     const db = client.db("progetto");
     const col = db.collection("posts");
-
     let newPostJSON = {
         "user": req.session.user,
         "phrase": req.body.phrase
@@ -306,14 +283,12 @@ insertPostInDB = async function (req, res) {
 startPoint = async function (userEmail, game) {
     const db = client.db("progetto");
     var pointsCollection = "points_" + game;
-
     let newPointsJSON = {
         "email": userEmail,
         "points": 0
     }
 
     const col = db.collection(pointsCollection);
-
     try {
         const up = await col.insertOne(newPointsJSON);
     } catch (e) {
@@ -325,15 +300,24 @@ insertAnimalInDb = async function (req, res) {
     const db = client.db("progetto");
     const col = db.collection("users");
     try {
-        const up = await col.updateOne(
-            {
-                "email": req.session.user
-            },
-            {
-                $push: { "animals": req.body.animal }
-            },
-            { upsert: true }
-        );
+        const up = await col.updateOne({"email": req.session.user}, { $push: { "animals": req.body.animal }},
+            { upsert: true });
+    } catch (e) {
+        console.log(e);
+        res.status(500);
+        res.send("error");
+    }
+    res.status(200).end();
+}
+
+removeAnimalList = async function (req, res) {
+    const db = client.db("progetto");
+    const col = db.collection("users");
+
+    var email = req.body.email;
+
+    try {
+    const up = await col.updateOne({ "email": email }, { $unset: { animals: ""}});
     } catch (e) {
         console.log(e);
         res.status(500);
@@ -348,11 +332,9 @@ getPointsFromDB = async function (req, res) {
 
     const cursor = col.find();
     var points = (await cursor.toArray());
-
     points.sort(function (a, b) {
         return b.points - a.points;
     });
-
     var pointsJSON = JSON.stringify(points);
 
     res.send(pointsJSON);
@@ -362,7 +344,6 @@ getPointsFromDB = async function (req, res) {
 
 insertPointsInDB = async function (req, res) {
     if (req.session.authenticated) {
-
         var points = req.body.points;
         console.log(points);
         var userEmail = req.session.user;
@@ -419,6 +400,7 @@ removePost = async function (req, res) {
         res.status(401).end();
     }
 }
+
 //MD
 removePointMemory = async function (req, res) {
     const db = client.db("progetto");
@@ -433,6 +415,7 @@ removePointMemory = async function (req, res) {
         res.status(401).end();
     }
 }
+
 //MD
 removePointQuiz = async function (req, res) {
     const db = client.db("progetto");
@@ -456,20 +439,6 @@ removeUser = async function (req, res) {
 
     const del = await col.deleteOne({ "email": email });
     if (del.deletedCount === 1) {
-        res.status(200).end();
-    } else {
-        res.status(401).end();
-    }
-}
-
-removeAnimalList = async function (req, res) {
-    const db = client.db("progetto");
-    const col = db.collection("users");
-
-    var email = req.body.email;
-
-    const up = await col.updateOne({ "email": email }, {$unset: {words:1}} , {multi: true});
-    if (up.modifiedCount === 1) {
         res.status(200).end();
     } else {
         res.status(401).end();

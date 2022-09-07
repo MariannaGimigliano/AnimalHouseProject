@@ -143,7 +143,7 @@ function salvaPunti(){
   request.onload = () => {
     if (request.status == 200) {
       alert("punti aggiornati");
-      window.location.replace("/");
+      window.location.replace("/games");
     } 
   }
 }

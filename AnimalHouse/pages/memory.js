@@ -149,7 +149,7 @@ function salvaPunti(){
   request.onload = () => {
     if (request.status == 200) {
       alert("punti aggiornati");
-      window.location.replace("/frontOffice"); //PROVAAAA
+      window.location.replace("/games"); //PROVAAAA
     } 
   }
 }

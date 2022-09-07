@@ -113,7 +113,7 @@ function insertAnimal() {
       }),
 
       success: function () {
-        alert("Animale aggiunto");
+        alert("Nuovo animale preferito aggiunto con successo!");
         window.location.replace("/animali");
       },
       error: function (err) {
@@ -199,7 +199,7 @@ function addBooking() {
         "date": date
       }),
       success: function (responseText) {
-          alert("Prenotato!")
+          alert("Servizio prenotato con successo!")
           window.location.replace("/servizi");
       },
       error: function (err) {
@@ -230,7 +230,7 @@ function drawBookings(bookingsData){
     var divListaPrenotazioni = document.getElementById("listaPrenotazioni");
     for(var i=0 ; i<bookingsData.length ; i++){
     var bookings = document.createElement("p");
-    bookings.innerHTML = bookingsData[i].service + " - in data: "+ bookingsData[i].date;
+    bookings.innerHTML = bookingsData[i].service + " - Data: "+ bookingsData[i].date;
 
     divListaPrenotazioni.appendChild(bookings);
   }
@@ -251,7 +251,7 @@ function addPost() {
       }),
 
       success: function () {
-        alert("Post aggiunto");
+        alert("Post aggiunto con successo!");
         window.location.replace("/bacheca");
       },
       error: function (err) {

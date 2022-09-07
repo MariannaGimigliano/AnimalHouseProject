@@ -154,17 +154,22 @@ changePassword = async function (req, res) {
     }
 }
 
-//MD
 changeBooking = async function (req, res) {
     const db = client.db("progetto");
     const col = db.collection("bookings");
 
-    const up = await col.updateOne({ "_id": req.body.bookingId }, { $set: { "date": req.body.newData } });
-    if (up.modifiedCount === 1) {
-        res.status(200).end();
-    } else {
-        res.status(401).end();
+    var id = req.body._id;
+    var date = req.body.date;
+
+    try {
+        const up = await col.updateOne({"_id": ObjectId(id)}, { $set: { "date": date }},
+        {upsert: true});
+    } catch (e) {
+        console.log(e);
+        res.status(500);
+        res.send("error");
     }
+    res.status(200).end();
 }
 
 getBacheca = async function (req, res) {
@@ -269,7 +274,6 @@ insertPostInDB = async function (req, res) {
         "user": req.session.user,
         "phrase": req.body.phrase
     }
-
     try {
         const p = await col.insertOne(newPostJSON);
         res.status(200).end();
@@ -287,7 +291,6 @@ startPoint = async function (userEmail, game) {
         "email": userEmail,
         "points": 0
     }
-
     const col = db.collection(pointsCollection);
     try {
         const up = await col.insertOne(newPointsJSON);
@@ -353,17 +356,10 @@ insertPointsInDB = async function (req, res) {
 
         const col = db.collection(pointsCollection);
         try {
-            const up = await col.updateOne(
-                {
-                    "email": userEmail
-                },
-                {
+            const up = await col.updateOne({"email": userEmail},{
                     $set: { "email": userEmail },
-                    $inc: { "points": points },
-                },
-                {
-                    upsert: true
-                });
+                    $inc: { "points": points }},
+                { upsert: true});
         } catch (e) {
             console.log(e);
             res.status(500);
@@ -408,16 +404,8 @@ removePointMemory = async function (req, res) {
     var id = req.body._id;
 
     try {
-        const up = await col.updateOne(
-            {
-                "_id": ObjectId(id)
-            },
-            {
-                $set: { "points": 0 },
-            },
-            {
-                upsert: true
-            });
+        const up = await col.updateOne({"_id": ObjectId(id)},
+            { $set: { "points": 0 }}, {upsert: true});
     } catch (e) {
         console.log(e);
         res.status(500);
@@ -433,16 +421,9 @@ removePointQuiz = async function (req, res) {
     var id = req.body._id;
 
     try {
-        const up = await col.updateOne(
-            {
-                "_id": ObjectId(id)
-            },
-            {
-                $set: { "points": 0 },
-            },
-            {
-                upsert: true
-            });
+        const up = await col.updateOne({"_id": ObjectId(id)},
+            {$set: { "points": 0 }},
+            {upsert: true});
     } catch (e) {
         console.log(e);
         res.status(500);

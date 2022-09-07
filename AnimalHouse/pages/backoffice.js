@@ -60,7 +60,7 @@ function drawServices(services) {
 /* aggiunge un nuovo servizio */
 function addService() {
     var newService = document.getElementById("newService").value;
-    var description = document.getElementById("description").value;
+    var description = document.getElementById("newDescription").value;
 
     if (newService.length > 0 ) {
         $.ajax({
@@ -127,7 +127,7 @@ function drawBookings(bookingsData) {
         var divP = document.createElement("div"); // div elenco prenotazioni
         divP.setAttribute("class", "col");
         p = document.createElement("p");
-        p.innerHTML = bookingsData[i].user + " | " + bookingsData[i].service + "    Il giorno : " + bookingsData[i].date;
+        p.innerHTML = bookingsData[i].user + " - " + bookingsData[i].service + " - Data: " + bookingsData[i].date;
 
         divP.appendChild(p);
 
@@ -168,10 +168,9 @@ function drawBookings(bookingsData) {
     }
 }
 
-//MD
 /* modifica una prenotazione */
 function changeBooking(bookingId) {
-    var newData = document.getElementById(bookingId).value;        //NON FUNZIONA
+    var newData = document.getElementById(bookingId).value;
 
     $.ajax({
         url: "../changeBooking",
@@ -183,6 +182,7 @@ function changeBooking(bookingId) {
         }),
         success: function () {
             alert("Prenotazione cambiata : " + bookingId);
+            window.location.replace("/serviziback");
         },
         error: function (err) {
             alert("Non è possibile modificare la prenotazione!");

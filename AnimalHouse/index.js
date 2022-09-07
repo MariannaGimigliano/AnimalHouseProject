@@ -109,8 +109,8 @@ cookieSession = async function (req, res) {
     if (req.session.authenticated) {
         res.send(req.session);
     }
-    else { 
-        res.status(401).end() 
+    else {
+        res.status(401).end()
     };
 }
 
@@ -300,7 +300,7 @@ insertAnimalInDb = async function (req, res) {
     const db = client.db("progetto");
     const col = db.collection("users");
     try {
-        const up = await col.updateOne({"email": req.session.user}, { $push: { "animals": req.body.animal }},
+        const up = await col.updateOne({ "email": req.session.user }, { $push: { "animals": req.body.animal } },
             { upsert: true });
     } catch (e) {
         console.log(e);
@@ -317,7 +317,7 @@ removeAnimalList = async function (req, res) {
     var email = req.body.email;
 
     try {
-        const up = await col.updateOne({ "email": email }, { $unset: { animals: ""}});
+        const up = await col.updateOne({ "email": email }, { $unset: { animals: "" } });
     } catch (e) {
         console.log(e);
         res.status(500);

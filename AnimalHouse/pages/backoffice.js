@@ -144,6 +144,10 @@ function drawBookings(bookingsData) {
         textBox.setAttribute("type","date");
         textBox.setAttribute("id",bookingsData[i]._id); //come id diamo l'id della prenotazione
 
+        let today = new Date().toISOString().slice(0, 10);
+        //console.log("la data di oggi è: " + today);
+        textBox.min = today;
+
         var divChangeButton = document.createElement("div"); // bottone modifica data
         divChangeButton.setAttribute("class","col");
         var changeButton = document.createElement("button");
@@ -187,7 +191,6 @@ function changeBooking(bookingId) {
     })
 }
 
-//MD
 /* elimina una prenotazione */
 /*function removeBookingByService(bookingId) {                      //NON FUNZIONA
     var serviceName = document.getElementById(bookingId).value;
@@ -207,6 +210,7 @@ function changeBooking(bookingId) {
     })
 }*/
 
+//MD
 /* elimina una prenotazione */
 function removeBooking(bookingId) {
     $.ajax({

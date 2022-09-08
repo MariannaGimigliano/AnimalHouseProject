@@ -80,7 +80,7 @@ function flip() {
   }
 }
 
-/* blocca momentaneamente l'input tra una coppia e l'altra */
+/* blocca momentaneamente l'input dell'utente tra una coppia e l'altra */
 function blockuserinput() {
   var cards = document.getElementsByClassName("card");
   for (var i = 0; i < 16; i++) {
@@ -150,7 +150,7 @@ function checkVittoria() {
   }
 }
 
-/* salve il punteggio se l'utente è loggato */
+/* salva il punteggio */
 function salvaPunti() {
   let request = new XMLHttpRequest();
   request.open("POST", "/salvaPunti");

@@ -2,6 +2,14 @@
 Componenti gruppo: 
 Marianna Gimigliano 0000915343 - Martina Daghia 0000915665 - Martina Zauli 0000915901
 
+# CREDENZIALI ACCOUNT
+UTENTI
+martina@ciao.it - pssw: marti
+marianna@ciao.it - pssw: mari
+
+ADMIN
+admin@admin - pssw: admin
+
 # Istruzioni di avvio
 Per visualizzare il sito Animal House è necessario aver installato sul proprio computer Node ed Express. Per avviare il sito bisogna digitare da terminale "npm start" e, una volta avviato il server, aprire il browser e digitare l'indirizzo "http://localhost:3000/".
 
@@ -94,12 +102,3 @@ Per la maggior parte delle classi abbiamo creato una pagina statica html dove so
 Per quanto riguarda le classi che utilizzano API, le richieste sono state effettuate tramite XMLHttpRequest, il quale invia una richiesta all'API per ottenere gli oggetti JSON di interesse.
 Mentre per le classi FrontOffice e BackOffice che utilizzano il DataBase di MongoDB e il server Node, sono state effettuate delle richieste tramite Ajax. Queste richieste Ajax vengono gestite nel file index.js, dove sono implementati i metodi che si occupano delle operazioni con il DataBase. Inoltre, nella classe index.js, si trovano le funzioni di routing che permettono il reindirizzamento al metodo corretto sulla base dell'url inserito nella richiesta.
 Nelle classi .js sono inoltre presenti i metodi per la creazione e modifica della grafica sulla base delle diverse necessità in maniera dinamica, ad esempio: il footer e la nav bar si modificano se l'utente è generico o loggato, i dati presi dalle richieste Ajax GET vengono "disegnati" dinamicamente sulla pagina html.
-
-# ACCOUNT
-
-UTENTI
-martina@ciao.it - pssw: marti
-marianna@ciao.it - pssw: mari
-
-ADMIN
-admin@admin - pssw: admin

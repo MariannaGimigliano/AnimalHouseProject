@@ -284,9 +284,11 @@ getPostsFromDB = async function (req, res) {
 insertPostInDB = async function (req, res) {
     const db = client.db("progetto");
     const col = db.collection("posts");
+
     let newPostJSON = {
         "user": req.session.user,
-        "phrase": req.body.phrase
+        "phrase": req.body.phrase,
+        "image": req.body.image
     }
     try {
         const p = await col.insertOne(newPostJSON);

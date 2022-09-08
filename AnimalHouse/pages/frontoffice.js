@@ -240,6 +240,7 @@ function drawBookings(bookingsData){
 /* aggiunge il nuovo post dato in input */
 function addPost() {
   var post = document.getElementById("inputPost").value;
+  var image = document.getElementById("inputImage").value;
 
   if (post.length > 0) {
     $.ajax({
@@ -247,7 +248,8 @@ function addPost() {
       method: 'POST',
       contentType: 'application/json',
       data: JSON.stringify({
-        "phrase": post
+        "phrase": post,
+        "image": image
       }),
 
       success: function () {
@@ -282,13 +284,22 @@ function drawPosts(posts) {
 
   for (var i = 0; i < posts.length; i++) {
       var div = document.createElement("div");
+      var divImg = document.createElement("div");
+
       div.setAttribute("class", "rounded p-3 p-md-3 m-md-3 mb-10 text-center bg-warning");
+      divImg.setAttribute("style", "height: 300px, width: auto");
+      div.setAttribute("style", "background-color: rgba(0, 0, 0, .85)"); //CONTROLAAAAA
 
       p = document.createElement("p");
+      img = document.createElement("img");
       p.innerHTML = posts[i].user + " ha pubblicato: " + posts[i].phrase;  
+      img.src = posts[i].image;
 
       div.appendChild(p);
+      divImg.appendChild(img);
 
       bachecaPosts.appendChild(div);
+      bachecaPosts.appendChild(divImg);
+
   }
 }

@@ -1,6 +1,5 @@
 # AnimalHouse - Progetto Tecnologie Web
-# Componenti gruppo
-Marianna Gimigliano 0000915343 - Martina Daghia 0000915665 - Martina Zauli 0000915901
+Componenti gruppo: Marianna Gimigliano 0000915343 - Martina Daghia 0000915665 - Martina Zauli 0000915901
 
 # Game
 E' formato da cinque attività principali:
@@ -27,10 +26,12 @@ Mentre, se un utente è loggato, apparirà un pulsante per salvare il punteggio 
 In entrambi i casi il quiz continuerà finchè l'utente non cliccherà il bottone per terminare il quiz, in quanto non è previsto un numero massimo di domande, ma l'utente potrà andare avanti con la prossima domanda cliccando il bottone di riferimento.
 
 # Memory
+Il memory è composto da 16 carte, all'apertura della pagina queste carte sono tutte girate a faccia in giù. 
+Ad ogni interazione l'utente dovrà cercare e selezionare due immagini con lo stessa figura rappresentata. Ogni volta che l'utente selezionerà una carta essa si girerà e mostrerà la figura sappresentata. Se l'utente ha selezionato due immagini con la stessa figura esse si bloccheranno e rimmarranno girate, se invece le carte che ha selezionato l'utente saranno diverse esse si torneranno a girare a faccia in giù.
+Una volta che l'utente sarà riuscito a scoprire tutte le 16 carte sul tavolo apparirà un messaggio di vincita e il quiz terminerà. 
+Verrà assegnato il punto ogni volta che l'utente riuscirà a scoprire tutte le carte che sono presenti sul campo da gioco.
 
 # come abbiamo gestito i punteggi dei giochi
-
-# Cosa fa l'utente amministratore e cosa visualizza
 
 # gestione e spiegazione scelta del DB
 
@@ -50,4 +51,5 @@ Utenti registrati
     - Accedere alla sezione giochi che presenta le stesse caratteristiche di quella degli utenti non registrati
 
 Admin
+    - 
 # Gestione dei servizi, eccetera

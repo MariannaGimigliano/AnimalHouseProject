@@ -288,7 +288,6 @@ function drawPosts(posts) {
 
       div.setAttribute("class", "rounded p-3 p-md-3 m-md-3 mb-10 text-center bg-warning");
       divImg.setAttribute("style", "height: 300px, width: auto");
-      div.setAttribute("style", "background-color: rgba(0, 0, 0, .85)"); //CONTROLAAAAA
 
       p = document.createElement("p");
       img = document.createElement("img");

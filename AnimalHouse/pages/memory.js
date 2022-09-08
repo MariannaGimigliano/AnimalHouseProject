@@ -1,5 +1,6 @@
 document.onload = loadpage();
 var session;
+var loggato = false;
 
 async function loadpage() {
   getSessionInfo();
@@ -131,9 +132,16 @@ function checkVittoria() {
   }
 
   if (countgirate == 16) {
-    var messaggiovittoria = document.getElementById("msgvittoria");
-    messaggiovittoria.classList.remove("nascosta");
-    salvaPunti();
+    if (loggato) {
+      var messaggiovittoria = document.getElementById("msgvittoria");
+      messaggiovittoria.innerHTML = "Complimenti! Hai trovato tutte le coppie. Hai guadagnato un punto.";
+      messaggiovittoria.classList.remove("nascosta");
+      salvaPunti();
+    } else {
+      var messaggiovittoria = document.getElementById("msgvittoria");
+      messaggiovittoria.innerHTML = "Complimenti! Hai trovato tutte le coppie.";
+      messaggiovittoria.classList.remove("nascosta");
+    }
   }
 }
 
@@ -175,6 +183,7 @@ function getSessionInfo() {
 /* cambia dinamicamente nav e footer se c'è un utente loggato */
 function changeNavButton() {
   if (session.authenticated) {
+    loggato = true;
     var setHomeButton = document.getElementById("setHome");
     setHomeButton.innerHTML = "FrontOffice";
     setHomeButton.setAttribute("href", "/frontOffice");

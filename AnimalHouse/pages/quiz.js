@@ -15,8 +15,9 @@ function sendRequest() {
       var animaliJSON = JSON.parse(request.response);
       mostraDomanda(animaliJSON);
       creoRadio(animaliJSON);
-      nuovaRequest(); //serve per fare una nuova richiesta all'api e stampare un'altro nome dell'animale
-      newRequest();
+      //altre due richieste all'api per stamparmi altri due radio button
+      nuovaRequest();
+      nuovaRequest(); 
       //console.log(animaliJSON);
     } else {
       //errore
@@ -39,24 +40,8 @@ function nuovaRequest() {
   }
 }
 
-/* nuova richiesta all'api */
-function newRequest() {
-  let request = new XMLHttpRequest();
-  request.open("GET", "https://zoo-animal-api.herokuapp.com/animals/rand/");
-  request.send();
-  request.onload = () => {
-    if (request.status == 200) {
-      var animaliJSON = JSON.parse(request.response);
-      creoRadio(animaliJSON);
-      //console.log(animaliJSON);
-    }
-  }
-}
-
 //creo una variabile che mi serve per tenere in memoria il punteggio di ogni sessione di quiz
 var punteggio = 0;
-
-var nomeAnimaleCorretto = "";
 
 /* disegna nei div il quiz */
 function mostraDomanda(animaliJSON) {
@@ -66,12 +51,10 @@ function mostraDomanda(animaliJSON) {
   var containerRisposte = document.getElementById("risposte");
   var rispostaCorretta = document.getElementById("rispostaCorretta");
   var rispostaSelezionata = document.getElementById("rispostaSelezionata");
-  //var containerMain = document.getElementById("contenitoreMain");
-  var messaggioindovinato = document.getElementById("msgindovinato");
-  var messaggiosbagliato = document.getElementById("msgsbagliato");
 
-  messaggioindovinato.classList.add("nascosta");
-  messaggiosbagliato.classList.add("nascosta");
+  //salviamo il nome dell'animale dell'immagine
+  var nomeAnimaleCorretto = "";
+  nomeAnimaleCorretto = animaliJSON.name;
 
   //resetto i contenitori ogni volta che clicco il bottone
   containerDomanda.innerHTML = "";
@@ -89,8 +72,6 @@ function mostraDomanda(animaliJSON) {
   immagine.src = animaliJSON.image_link;
   containerImmagine.appendChild(immagine);
 
-  //MM
-
   //mostro pulsante per passare alla domanda successiva
   var btn2 = document.getElementById("next");
   btn2.style.display = "block";
@@ -102,8 +83,6 @@ function mostraDomanda(animaliJSON) {
   //creo un elemento p per stampare il risultato
   var containerRisultato = document.getElementById("mostraRisultato");
   var p = document.createElement("p");
-
-  nomeAnimaleCorretto = "";
 
   const form = document.querySelector("form");
   //controllo che il radio è stato cliccato ed estrapolo il suo valore
@@ -119,9 +98,6 @@ function mostraDomanda(animaliJSON) {
     rispostaSelezionata.innerHTML = "Hai selezionato questa risposta: " + output;
     event.preventDefault();
 
-    //salviamo il nome dell'animale dell'immagine
-    nomeAnimaleCorretto = animaliJSON.name;
-
     rispostaCorretta.innerHTML = "La risposta corretta è: " + nomeAnimaleCorretto;
 
     console.log(valoreRadioSelezionato + "/");
@@ -132,13 +108,11 @@ function mostraDomanda(animaliJSON) {
       punteggio++;
       console.log("Punteggio: " + punteggio);
 
-      messaggioindovinato.classList.remove("nascosta");
 
     } else if (valoreRadioSelezionato.trim() != nomeAnimaleCorretto.trim()) {
       console.log("RISPOSTA SELEZIONATA NON CORRETTA");
       console.log("Punteggio: " + punteggio);
 
-      messaggiosbagliato.classList.remove("nascosta");
     }
 
     containerRisultato.innerHTML = "";
@@ -169,7 +143,6 @@ function creoRadio(animaliJSON) {
 
   containerRisposte.appendChild(label);
   containerRisposte.appendChild(input);
-
 }
 
 /* salva i punti se l'utente è loggato */
@@ -193,7 +166,7 @@ function salvaPunti() {
   }
 }
 
-/* termina il quiz */
+/* termina il quiz per l'utente non loggato*/
 function terminaQuiz() {
   //console.log("Quiz terminato");
 
@@ -238,7 +211,7 @@ function getSessionInfo() {
   };
 }
 
-/* cambia dinamicamente nav e footer se c'è un utente loggato */
+/* cambia dinamicamente nav e footer se c'è un utente loggato e i bottoni di riferimento*/
 function changeNavButton() {
   if (session.authenticated) {
     var setHomeButton = document.getElementById("setHome");

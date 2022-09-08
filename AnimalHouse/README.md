@@ -1,6 +1,8 @@
 # AnimalHouse - Progetto Tecnologie Web
 Componenti gruppo: Marianna Gimigliano 0000915343 - Martina Daghia 0000915665 - Martina Zauli 0000915901
 
+# Utilizzo e gestione del DB
+
 # Game
 E' formato da cinque attività principali:
     1. Immagini buffe e divertenti
@@ -31,9 +33,10 @@ Ad ogni interazione l'utente dovrà cercare e selezionare due immagini con lo st
 Una volta che l'utente sarà riuscito a scoprire tutte le 16 carte sul tavolo apparirà un messaggio di vincita e il quiz terminerà. 
 Verrà assegnato il punto ogni volta che l'utente riuscirà a scoprire tutte le carte che sono presenti sul campo da gioco.
 
-# come abbiamo gestito i punteggi dei giochi
+# Gestione punteggi quiz e memory
+Per salvare i punteggi dei relativi giochi ci siamo appoggiate a due tabelle (points_quiz e points_memory) del nostro database. Per inserire i punti all'interno delle nostre tabelle abbiamo usato la mail dell'utente e il punteggio.
 
-# gestione e spiegazione scelta del DB
+# Gestione dei servizi, eccetera
 
 # Cosa possono fare gli utenti registrati e quelli non
 Utenti non registrati 
@@ -51,5 +54,9 @@ Utenti registrati
     - Accedere alla sezione giochi che presenta le stesse caratteristiche di quella degli utenti non registrati
 
 Admin
-    - 
-# Gestione dei servizi, eccetera
+    - Può gestire gli utenti ovvero li può visualizzare, modificare la password, cancellare l'utente e rimuovere la lista degli animali dell'utente selezionato
+    - Può gestire la bacheca ovvero può visualizzare i post degli utenti ed eliminarli
+    - Può inserire un nuovo servizio con il nome del servizio e la sua relativa destrizione.
+    Può visualizzare la lista dei servizi ed eliminare un servizio. Eliminando il servizio si elimineranno contemporaneamente le prenotazioni degli utenti di quel servizio.
+    - Può visualizzare la lista delle prenotazioni degli utenti, cambiare la data della prenotazione dell'utente di riferimento o eliminare la prenotazione
+    - Può visualizzare la leaderboard del quiz e del memory e azzerare i punteggi dei giocatori.

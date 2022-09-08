@@ -388,21 +388,26 @@ function drawPosts(posts) {
     
     for (var i = 0; i < posts.length; i++) {
         var div = document.createElement("div");
-        div.setAttribute("class", "row");
+        div.setAttribute("class", "rounded p-3 p-md-3 m-md-3 mb-10 text-center bg-warning");
 
         var divP = document.createElement("div"); // div elenco post
         divP.setAttribute("class", "col");
         p = document.createElement("p");
+        img = document.createElement("img");
+        img.setAttribute("style", "height: 200px;");
+
         p.setAttribute("value", posts[i].phrase);
         p.innerHTML = posts[i].user + " ha postato: " + posts[i].phrase;  
+        img.src = posts[i].image;
 
         divP.appendChild(p);
+        divP.appendChild(img);
 
         var divButton = document.createElement("div"); // bottone cancella post
         divButton.setAttribute("class", "col");
         var button = document.createElement("button");
         button.innerHTML = "Elimina Post"
-        button.setAttribute("class", "btn btn-danger");
+        button.setAttribute("class", "btn btn-danger mt-2");
         button.addEventListener("click", removePost.bind(this, posts[i]._id));
 
         divButton.appendChild(button);

@@ -2,6 +2,7 @@
 Componenti gruppo: Marianna Gimigliano 0000915343 - Martina Daghia 0000915665 - Martina Zauli 0000915901
 
 # Utilizzo e gestione del DB
+Abbiamo scelto di immagazzinare i dati in un database fornitoci dal servio online di mongoDB per una più semplice gestione.
 
 # Game
 E' formato da cinque attività principali:
@@ -28,35 +29,45 @@ Altrimenti, se un utente è loggato, apparirà un pulsante per poter salvare il 
 In entrambi i casi, il quiz continuerà fino a che l'utente non cliccherà il bottone per terminare il quiz, in quanto non è previsto un numero massimo di domande, ma l'utente potrà andare avanti con la prossima domanda cliccando il bottone di riferimento.
 
 # Memory
-Il memory è composto da 16 carte, all'apertura della pagina queste carte sono tutte girate a faccia in giù. 
-Ad ogni interazione l'utente dovrà cercare e selezionare due immagini con lo stessa figura rappresentata. Ogni volta che l'utente selezionerà una carta essa si girerà e mostrerà la figura sappresentata. Se l'utente ha selezionato due immagini con la stessa figura esse si bloccheranno e rimmarranno girate, se invece le carte che ha selezionato l'utente saranno diverse esse si torneranno a girare a faccia in giù.
-Una volta che l'utente sarà riuscito a scoprire tutte le 16 carte sul tavolo apparirà un messaggio di vincita e il quiz terminerà. 
-Verrà assegnato il punto ogni volta che l'utente riuscirà a scoprire tutte le carte che sono presenti sul campo da gioco.
+Il memory è composto da 16 carte e all'apertura della pagina sono tutte coperte. 
+Ad ogni interazione, l'utente dovrà cercare di trovare due immagini con lo stessa figura rappresentata. Ogni volta che l'utente selezionerà una carta cliccandoci sopra, questa verrà resa visibile mostrando la figura della carta posizionata in quel punti. Se l'utente ha selezionato due immagini con la stessa figura, queste si bloccheranno e rimmarranno scoperte, invece se le carte che ha selezionato l'utente saranno diverse queste verranno nuovamente coperte nascondendone la figura.
+Una volta che l'utente sarà riuscito a scoprire tutte le 16 carte sul tavolo, apparirà un messaggio di vincita e il quiz terminerà. 
+Il punto verrà assegnato ogni volta che l'utente riuscirà a scoprire tutte le carte che sono presenti sul campo da gioco.
+Nel caso in cui l'utente si fosse loggato prima di iniziare il gioco, il messaggio indicherà che il giocatore ha guadagnato un punto e il suo punteggio verrà aggiornato immediatamente nella leaderboard. Nel caso in cui l'utente non si fosse loggato verrà visualizzato solo il messaggio di vincita.
 
 # Gestione punteggi quiz e memory
-Per salvare i punteggi dei relativi giochi ci siamo appoggiate a due tabelle (points_quiz e points_memory) del nostro database. Per inserire i punti all'interno delle nostre tabelle abbiamo usato la mail dell'utente e il punteggio.
-
-# Gestione dei servizi, eccetera
+Per salvare i punteggi dei relativi giochi, ci siamo appoggiate a due tabelle (points_quiz e points_memory) presenti nel nostro database. Per poter inserire i punti all'interno delle nostre tabelle, abbiamo usato la mail dell'utente e il punteggio di riferimento.
 
 # Cosa possono fare gli utenti registrati e quelli non
 Utenti non registrati 
     - Visualizzare la sezione "Scopri chi siamo" della piattaforma Animal House
-    - Accedere alla sezione game
-    - Effettuare il login o effettuare una nuova registrazione
+    - Accedere alla sezione game e partecipare personalmente ai giochi senza, però, acquisire un proprio punteggio ed entrare nella leaderboard
+    - Effettuare il login o effettuare una nuova registrazione.
 
 Utenti registrati 
-    - Possono visualizzare i servizi che offre la piattaforma.
-    - Possono prenotare uno dei servizi offerti con la data corrispondente.
-    - Possono visualizzare la bacheca dei post con i post degli utenti
-    - Possono aggiungere dei post aggiungendo una descrizione testuale e l'immagine
-    - Possono visualizzare la leaderboard dei punteggi del quiz e del memory di tutti i giocatori
-    - Aggiungere e visualizzare i propri animali preferiti.
-    - Accedere alla sezione giochi che presenta le stesse caratteristiche di quella degli utenti non registrati
+    - Visualizzare i servizi che offre la piattaforma
+    - Visualizzare le proprie prenotazioni
+    - Prenotare uno dei servizi offerti scegliendo il servizio di gradimento e la data tramite i menu a tendina corrispondenti
+    - Visualizzare nella bacheca tutti i post pubblicati dagli utenti
+    - Aggiungere un post inserendo una descrizione testuale e facendo l'upload di un'immagine
+    - Visualizzare la leaderboard dei punteggi di tutti i giocatori distinguendo i risultati del quiz e del memory 
+    - Aggiungere e visualizzare i propri animali preferiti
+    - Accedere alla sezione giochi che presenta le stesse caratteristiche di quella degli utenti non registrati con la distinzione di poter acquisire un punteggio e partecipare alla classifica visualizzata nella leaderboard.
 
 Admin
-    - Può gestire gli utenti ovvero li può visualizzare, modificare la password, cancellare l'utente e rimuovere la lista degli animali dell'utente selezionato
-    - Può gestire la bacheca ovvero può visualizzare i post degli utenti ed eliminarli
-    - Può inserire un nuovo servizio con il nome del servizio e la sua relativa destrizione.
-    Può visualizzare la lista dei servizi ed eliminare un servizio. Eliminando il servizio si elimineranno contemporaneamente le prenotazioni degli utenti di quel servizio.
-    - Può visualizzare la lista delle prenotazioni degli utenti, cambiare la data della prenotazione dell'utente di riferimento o eliminare la prenotazione
-    - Può visualizzare la leaderboard del quiz e del memory e azzerare i punteggi dei giocatori.
+    - Gestire gli utenti: possibilità di visualizzarli, modificarne la password, cancellare un utente e rimuovere la lista degli animali dell'utente selezionato
+    - Gestire la bacheca: possibilità di visualizzare i post pubblicati dagli utenti ed eliminarli
+    - Inserire un nuovo servizio indicandone il nome e la relativa descrizione
+    - Visualizzare la lista dei servizi offerti ed eliminarne uno. L'eliminazione del servizio comporta automaticamente anche l'eliminazione delle prenotazioni degli utenti corrispondenti a quel servizio
+    - Visualizzare la lista delle prenotazioni degli utenti, cambiare la data della prenotazione dell'utente di riferimento o eliminarne la prenotazione
+    - Visualizzare la leaderboard dei punteggi di tutti i giocatori distinguendo i risultati del quiz e del memory e azzerare i punteggi dei giocatori.
+
+# BACKOFFICE
+
+# Gestione utenti
+
+# Gestione dei servizi
+
+# Gestione bacheca
+
+# Gestione leaderboard quiz e memory

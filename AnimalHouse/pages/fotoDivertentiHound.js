@@ -88,7 +88,7 @@ function mostraInfo(houndJSON) {
   var walker = document.createElement("h4");
   walker.innerHTML = "Hound Walker";
   containerWalker.appendChild(walker);
-  for (var i = 948; i < 951; i++) { //arrayLength
+  for (var i = 948; i < 951; i++) {
     var immagine = document.createElement("img");
     immagine.src = houndJSON.message[i];
     containerWalker.appendChild(immagine);

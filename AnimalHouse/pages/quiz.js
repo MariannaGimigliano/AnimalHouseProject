@@ -25,6 +25,7 @@ function sendRequest() {
   }
 }
 
+/* nuova richiesta all'api */
 function nuovaRequest() {
   let request = new XMLHttpRequest();
   request.open("GET", "https://zoo-animal-api.herokuapp.com/animals/rand/");
@@ -38,6 +39,7 @@ function nuovaRequest() {
   }
 }
 
+/* nuova richiesta all'api */
 function newRequest() {
   let request = new XMLHttpRequest();
   request.open("GET", "https://zoo-animal-api.herokuapp.com/animals/rand/");
@@ -56,6 +58,7 @@ var punteggio = 0;
 
 var nomeAnimaleCorretto = "";
 
+/* disegna nei div il quiz */
 function mostraDomanda(animaliJSON) {
 
   var containerDomanda = document.getElementById("domanda");
@@ -146,6 +149,7 @@ function mostraDomanda(animaliJSON) {
 
 }
 
+/* crea i radio buttons per le risposte */
 function creoRadio(animaliJSON) {
   var containerRisposte = document.getElementById("risposte");
   var label = document.createElement("label");
@@ -168,6 +172,7 @@ function creoRadio(animaliJSON) {
 
 }
 
+/* salva i punti se l'utente è loggato */
 function salvaPunti() {
   var points = document.getElementById("punteggiospan").innerHTML;
 
@@ -188,6 +193,7 @@ function salvaPunti() {
   }
 }
 
+/* termina il quiz */
 function terminaQuiz() {
   //console.log("Quiz terminato");
 
@@ -263,8 +269,6 @@ function changeNavButton() {
 
     var btnSalvaPunti = document.getElementById("salvapunti");
     btnSalvaPunti.style.visibility = "visible"; //mostro il bottone per salvare i punti e terminare il quiz se l'utente effettua il login
-
   }
-
 }
 

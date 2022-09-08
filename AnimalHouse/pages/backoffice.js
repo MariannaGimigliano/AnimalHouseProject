@@ -145,7 +145,6 @@ function drawBookings(bookingsData) {
         textBox.setAttribute("id",bookingsData[i]._id); //come id diamo l'id della prenotazione
 
         let today = new Date().toISOString().slice(0, 10);
-        //console.log("la data di oggi è: " + today);
         textBox.min = today;
 
         var divChangeButton = document.createElement("div"); // bottone modifica data

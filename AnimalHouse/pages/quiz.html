@@ -41,10 +41,10 @@
     <h3 class="display-6 fw-normal">Prova ad indovinare di che animale si tratta dalla foto!</h3>
   </div>
 
-  <main id="contenitoreMain">
+  <main class="position-relative overflow-hidden p-3 p-md-5 m-md-3 text-center" id="contenitoreMain">
 
-    <input id="next" class="btn btn-outline-secondary" type="button" style="display:none" value="Prossima domanda"
-      onclick="sendRequest()">
+    <a style="margin-bottom: 40px;" id="next" class="btn btn-outline-secondary" onclick="sendRequest()">Prossima domanda</a>
+
 
     <div id="domanda"></div>
 
@@ -53,7 +53,8 @@
     <form>
       <div id="risposte"></div>
 
-      <button id="controlla" class="btn btn-outline-secondary" type="submit" style="display:none">Controlla
+      <a style="margin-bottom: 40px; width: fit-content; visibility: hidden;" id="controlla" class="btn btn-outline-secondary" type="submit">Controlla risposta</a>
+      <button id="controlla" class="btn btn-outline-secondary" type="submit">Controlla
         risposta</button>
     </form>
 
@@ -65,17 +66,17 @@
       Complimenti! Hai risposto giusto alla domanda. Hai guadagnato un punto.
     </div>
 
+    <div id="mostraRisultato"></div>
+
+    <!-- bottone per terminare il gioco e salvare i punteggi se sei registrato -->
+    <input id="salvapunti" class="btn btn-danger" type="button" style="visibility: hidden;"
+      value="Salva punteggio e termina quiz" onclick="salvaPunti()">
+    <br>
+    <!-- bottone per terminare il gioco se non sei registrato -->
+    <input id="termina" class="btn btn-danger" type="button" value="Termina quiz"
+      onclick="terminaQuiz()">
+
   </main>
-
-  <div id="mostraRisultato"></div>
-
-  <!-- bottone per terminare il gioco e salvare i punteggi se sei registrato -->
-  <input id="salvapunti" class="btn btn-outline-secondary" type="button" style="display:none"
-    value="Salva punteggio e termina quiz" onclick="salvaPunti()">
-
-  <!-- bottone per terminare il gioco se non sei registrato -->
-  <input id="termina" class="btn btn-outline-secondary" type="button" style="display:block" value="Termina quiz"
-    onclick="terminaQuiz()">
 
   <footer>
     <div class="row">
@@ -85,7 +86,6 @@
           <li><a class="link-secondary" id="setHomeFoot" href="/">Homepage</a></li>
           <li><a class="link-secondary" href="/games">Giochi</a></li>
           <li><a class="link-secondary" id="setFoot" href="/info">Scopri chi siamo</a></li>
-
         </ul>
       </div>
       <div class="col-6 col-md">

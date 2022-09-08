@@ -188,18 +188,19 @@ function terminaQuiz() {
   var btn3 = document.getElementById("controlla");
   btn3.style.display = "none";
 
-  var containerMain = document.getElementById("contenitoreMain");
-  containerMain.innerHTML = "";
-
-  var h4 = document.createElement("h4");
-  h4.innerHTML = "Il quiz è terminato! Torna nella home dei giochi e scopri gli altri nostri giochi!";
-
-  var containerRisultato = document.getElementById("mostraRisultato");
-  containerRisultato.appendChild(h4);
-
   var btnTermina = document.getElementById("termina");
   btnTermina.style.display = "none"; //nascono il bottone quando mostro la schermata finale
 
+  var containerMain = document.getElementById("contenitoreMain");
+  containerMain.innerHTML = "";
+
+  var punti = document.createElement("h4");
+  punti.innerHTML = "Hai totalizzato " + punteggio + " punti!";
+  containerMain.appendChild(punti);  
+
+  var h4 = document.createElement("h4");
+  h4.innerHTML = "Il quiz è terminato! Torna nella sezione giochi e diveriti ancora con noi!";
+  containerMain.appendChild(h4);
 }
 
 /* controlla se è aperta una sessione utente */
@@ -250,7 +251,7 @@ function changeNavButton() {
     btn4.style.display = "none";
 
     var btnSalvaPunti = document.getElementById("salvapunti");
-    btnSalvaPunti.style.display = "block"; //mostro il bottone per salvare i punti e terminare il quiz se l'utente effettua il login
+    btnSalvaPunti.style.visibility = "visible"; //mostro il bottone per salvare i punti e terminare il quiz se l'utente effettua il login
 
   }
   /*

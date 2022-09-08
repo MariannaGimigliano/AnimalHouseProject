@@ -47,7 +47,7 @@ function drawServices(services) {
         button.innerHTML = "Elimina"
         button.setAttribute("class", "btn btn-danger");
         button.addEventListener("click", removeService.bind(this, services[i]._id));
-        //button.addEventListener("click", removeBookingByService.bind(this, services[i]._id));
+        button.addEventListener("click", removeBookingByService.bind(this, services[i].name));
 
         divButton.appendChild(button);
         div.appendChild(divP);
@@ -191,26 +191,26 @@ function changeBooking(bookingId) {
     })
 }
 
-/* elimina una prenotazione */
-/*function removeBookingByService(bookingId) {                      //NON FUNZIONA
-    var serviceName = document.getElementById(bookingId).value;
+/* elimina una prenotazione dopo eliminazione di un servizio */
+function removeBookingByService(booking) {                
     $.ajax({
         url: "../removeBookingByService",
         method: 'DELETE',
         contentType: 'application/json',
         data: JSON.stringify({
-            "service": serviceName,
+            "service": booking,
         }),
         success: function (data) {
             alert("Prenotazioni eliminate");
+            window.location.replace("/serviziback");
         },
         error: function (err) {
             alert("Prenotazioni non eliminate");
         }
     })
-}*/
+}
 
-//MD
+
 /* elimina una prenotazione */
 function removeBooking(bookingId) {
     $.ajax({

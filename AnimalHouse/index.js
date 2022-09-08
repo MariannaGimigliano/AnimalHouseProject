@@ -172,19 +172,19 @@ changeBooking = async function (req, res) {
     res.status(200).end();
 }
 
-/*removeBookingByService = async function (req, res) {
+removeBookingByService = async function (req, res) {
     const db = client.db("progetto");
     const col = db.collection("bookings");
 
     var serviceName = req.body.service;
-
-    const del = await col.deleteOne({ "service": serviceName });
-    if (del.deletedCount === 1) {
+    
+    const del = await col.deleteMany({ service: serviceName });
+    if (del.deletedCount >= 1) {
         res.status(200).end();
     } else {
         res.status(401).end();
     }
-}*/
+}
 
 getBacheca = async function (req, res) {
     res.sendFile(__dirname + "/pages/bacheca.html");
@@ -666,7 +666,7 @@ app.post("/removePointsQuiz", removePointQuiz);
 
 app.delete("/removeBooking", removeBooking);
 
-//app.delete("/removeBookingByService", removeBookingByService);
+app.delete("/removeBookingByService", removeBookingByService);
 
 app.delete("/removeService", removeService);
 

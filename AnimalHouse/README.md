@@ -4,26 +4,26 @@ Componenti gruppo: Marianna Gimigliano 0000915343 - Martina Daghia 0000915665 - 
 # Game
 E' formato da cinque attività principali:
     1. Immagini buffe e divertenti
-       Composto a sua volta da immagini divertenti sui cani, sui gatti e sulle volpi. 
+       All'interno della pagina è possibile visualizzare immagini divertenti sui cani, sui gatti e sulle volpi. 
     2. Curiosità sugli animali
-       In questa sezione sarà possibile visualizzare randomicamente delle caratteristiche di un animale come ad esempio: il nome, il nome in latino, il peso, la durata di vita, l'habitat eccetera
+       In questa sezione è possibile osservare randomicamente delle caratteristiche di un animale come ad esempio il nome, il nome in latino, il peso, la durata di vita, l'habitat eccetera
     3. Memory (descritte in seguito)
     4. Quiz (descritte in seguito)
     5. Immagini sul segugio
        Sarà possibile visualizzare le diverse razze di segugio e vedere alcune immagini di essi.
 
 # Api utilizzate
-Per lo sviluppo del game, più precisamente della sezione immagini buffe abbiamo utilizzato 3 api che mi ritornano ogni volta che clicco il pulsante delle immagini/gif randomiche su i cani, i gatti e le volpi. 
+Per lo sviluppo del Game ci siamo avvalse dell'utilizzo di alcune API. Per fare un esempio, nella sezione immagini buffe abbiamo utilizzato 3 API che, ogni volta che viene cliccato il pulsante, mi vengono ritornate delle immagini/gif randomiche su cani, gatti e volpi. 
 
 # Quiz
-All'apertura delle pagina del quiz apparirà la domanda, l'immagine dell'animale da indovinare e tre radio button con 3 risposte diverse. Una volta che l'utente avrà selezionato la risposta che ritiene corretta dovrà cliccare sul bottone "Controlla" per controllare la risposta data.
-Se l'utente ha indovinato verrà mostrata la risposta che ha selezionato e quella corretta e di consegnuenza verrà anche incrementato il punteggio.
-Se invece, l'utente seleziona la risposta errata o non seleziona nulla verrà sempre mostrata la risposta data o non data e la risposta corretta, ma in questo caso il punteggio non si incrementerà.
+All'apertura della pagina relativa al Quiz appariranno la domanda, l'immagine dell'animale da indovinare e tre radio button con le tre opzioni di risposta. Una volta che l'utente avrà selezionato la risposta che ritiene corretta, dovrà cliccare sul bottone "Controlla" per verificare che la risposta data sia quella giusta.
+Se l'utente indovina, verrà mostrata la risposta che ha selezionato insieme quella corretta e, di conseguenza, verrà anche incrementato il punteggio.
+Se, invece, l'utente ha selezionato la risposta errata o non seleziona nulla verrà sempre mostrata la risposta data oppure non data e la risposta corretta, ma in questo caso il punteggio non verrà incrementato.
 
-Nel quiz compaiono due bottoni differenti in due casistiche diverse ovvero quando l'utente effettua il login e quando non lo effettua.
-Quando l'utente non effettua il login sarà possibile iniziare il gioco e giocare, sarà presente un pulsante per terminare il quiz che permette di interrompere il quiz e visualizzare il punteggio finale sella sessione di gioco.
-Mentre, se un utente è loggato, apparirà un pulsante per salvare il punteggio e terminare il quiz. Il punteggio dell'utente registrato apparirà nella leaderboard con quelli degli altri utenti.
-In entrambi i casi il quiz continuerà finchè l'utente non cliccherà il bottone per terminare il quiz, in quanto non è previsto un numero massimo di domande, ma l'utente potrà andare avanti con la prossima domanda cliccando il bottone di riferimento.
+Nel quiz compaiono due bottoni differenti per due casistiche differenti, ovvero la situazione in cui l'utente effettua il login e quando, invece, non lo effettua.
+Quando l'utente non effettua il login, sarà possibile iniziare il gioco affrontando le domande e verrà visualizzato un pulsante per terminare il quiz che permette all'utente di interrompere il quiz e poter visualizzare il punteggio finale della sessione di gioco.
+Altrimenti, se un utente è loggato, apparirà un pulsante per poter salvare il punteggio e terminare così il quiz. Il punteggio dell'utente registrato apparirà nella leaderboard insieme a quelli degli altri utenti.
+In entrambi i casi, il quiz continuerà fino a che l'utente non cliccherà il bottone per terminare il quiz, in quanto non è previsto un numero massimo di domande, ma l'utente potrà andare avanti con la prossima domanda cliccando il bottone di riferimento.
 
 # Memory
 Il memory è composto da 16 carte, all'apertura della pagina queste carte sono tutte girate a faccia in giù. 

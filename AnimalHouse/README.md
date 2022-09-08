@@ -1,10 +1,11 @@
 # AnimalHouse - Progetto Tecnologie Web
-Componenti gruppo: Marianna Gimigliano 0000915343 - Martina Daghia 0000915665 - Martina Zauli 0000915901
+Componenti gruppo: 
+Marianna Gimigliano 0000915343 - Martina Daghia 0000915665 - Martina Zauli 0000915901
 
 # Istruzioni di avvio
 Per visualizzare il sito Animal House è necessario aver installato sul proprio computer Node ed Express. Per avviare il sito bisogna digitare da terminale "npm start" e, una volta avviato il server, aprire il browser e digitare l'indirizzo "http://localhost:3000/".
 
-# Utilizzo e gestione del DB
+# DATABASE
 Abbiamo scelto di immagazzinare i dati in un database fornitoci dal servio online di MongoDB per una più semplice gestione.
 
 # Game
@@ -18,7 +19,7 @@ E' formato da cinque attività principali:
     5. Immagini sul segugio
        Sarà possibile visualizzare le diverse razze di segugio e vedere alcune immagini di essi.
 
-# Api utilizzate
+# API utilizzate
 Per lo sviluppo del Game ci siamo avvalse dell'utilizzo di alcune API. Per fare un esempio, nella sezione immagini buffe abbiamo utilizzato 3 API che, ogni volta che viene cliccato il pulsante, mi vengono ritornate delle immagini/gif randomiche su cani, gatti e volpi. Inoltre abbiamo utilizzato un'altra API per farmi ritornare alcune razze con le relative immagini dei segugi.
 Inoltre per le curiosità degli animali e il quiz abbiamo utilizzato un'altra API che generava informazioni su animali di vario tipo.
 Per la gestione del memory abbiamo usato la API dei cani (utilizzata anche per le immagini buffe).
@@ -45,11 +46,12 @@ Nel caso in cui l'utente si fosse loggato prima di iniziare il gioco, il messagg
 # Gestione punteggi quiz e memory
 Per salvare i punteggi dei relativi giochi, ci siamo appoggiate a due tabelle (points_quiz e points_memory) presenti nel nostro database. Per poter inserire i punti all'interno delle nostre tabelle, abbiamo usato la mail dell'utente e il punteggio di riferimento.
 
-# Tipi di utenti: utenti non registrati, utenti registrati e admin
+# Tipi di utenti e funzionalità: utenti non registrati, utenti registrati e admin
 Utenti non registrati 
     - Visualizzare la sezione "Scopri chi siamo" della piattaforma Animal House
-    - Accedere alla sezione game e partecipare personalmente ai giochi senza, però, acquisire un proprio punteggio ed entrare nella leaderboard
-    - Effettuare il login o effettuare una nuova registrazione.
+    - Accedere alla sezione game e partecipare ai giochi senza, però, acquisire un proprio punteggio ed entrare nella leaderboard
+    - Effettuare il login
+    - Effettuare una nuova registrazione
 
 Utenti registrati 
 A seguito del login si apre la pagina del FrontOffice che permette di accedere a 4 diverse sezioni:
@@ -63,25 +65,32 @@ A seguito del login si apre la pagina del FrontOffice che permette di accedere a
     3. Sezione LEADERBOARD
         - Visualizzare la leaderboard dei punteggi di tutti i giocatori distinguendo i risultati del quiz e del memory 
     4. Sezione ANIMALI PREFERITI
-        - Aggiungere e visualizzare i propri animali preferiti
+        - Visualizzare i propri animali preferiti
+        - Aggiungere un nuovo animale preferito
 Inoltre, nella nav bar è possibile accedere alla sezione giochi che presenta le stesse caratteristiche di quella degli utenti non registrati con la distinzione di poter acquisire un punteggio e partecipare alla classifica visualizzata nella leaderboard.
 
 Admin
 A seguito del login si apre la pagina del BackOffice che permette di accedere a 4 diverse sezioni:
-    1. Sezione UTENTI
-        - Gestire gli utenti: possibilità di visualizzarli, modificarne la password, cancellare un utente e rimuovere la lista degli animali dell'utente selezionato
-    2. Sezione BACHECA
-        - Gestire la bacheca: possibilità di visualizzare i post pubblicati dagli utenti ed eliminarli
-    3. Sezione SERVIZI
+    1. Sezione GESTIONE UTENTI
+        - Visualizzare l'elenco degli utenti
+        - Modificare la password di un utente
+        - Cancellare un utente 
+        - Rimuovere la lista degli animali dell'utente selezionato
+    2. Sezione GESTIONE BACHECA
+        - Visualizzare i post pubblicati dagli utenti
+        - Eliminare i post pubblicati dagli utenti
+    3. Sezione GESTIONE SERVIZI
         - Inserire un nuovo servizio indicandone il nome e la relativa descrizione
-        - Visualizzare la lista dei servizi offerti ed eliminarne uno. L'eliminazione del servizio comporta automaticamente anche l'eliminazione delle prenotazioni degli utenti corrispondenti a quel servizio
-        - Visualizzare la lista delle prenotazioni degli utenti, cambiare la data della prenotazione dell'utente di riferimento o eliminarne la prenotazione
-    4. Sezione LEADERBOARD
-        - Visualizzare la leaderboard dei punteggi di tutti i giocatori distinguendo i risultati del quiz e del memory e azzerare i punteggi dei giocatori.
+        - Visualizzare la lista dei servizi offerti ed eliminarne uno (L'eliminazione del servizio comporta automaticamente anche l'eliminazione delle prenotazioni degli utenti corrispondenti a quel servizio)
+        - Visualizzare la lista delle prenotazioni degli utentI
+        - Cambiare la data della prenotazione dell'utente di riferimento
+        - EliminarE la prenotazione dell'utente di riferimento
+    4. Sezione GESTIONE LEADERBOARD
+        - Visualizzare la leaderboard dei punteggi di tutti i giocatori distinguendo i risultati del quiz e del memory 
+        - Azzerare i punteggi dei giocatori
 
-# Scelte implementative
-Per la maggiorparte delle classi abbiamo creato una pagina statica html dove sono raffigurate le componenti base della pagina e una pagina javascript che gestisce le componenti dinamiche.
-Per quanto riguarda le classi che utilizzano API le richieste sono state effettuate tramite XMLHttpRequest, il quale invia una richiesta all'API per ottenere gli oggetti JSON di interesse.
-Mentre per le classi FrontOffice e BackOffice che utilizzano il DataBase di MongoDB e il server Node sono state effettuate delle richieste tramite Ajax. Queste richieste Ajax vengono gestite nel file index.js, dove sono implementati i metodi che gestiscono le operazioni con il DataBase. 
-Inoltre vi si trovano le funzioni di routing che permettono il reindirizzamento al metodo corretto sulla base dell'url inserito nella richiesta Ajax.
-Nelle classi JS sono presenti anche dei metodi per la creazione e modifiche della grafica in maniera dinamica degli html, ad esempio: il footer e la nav bar si modificano se l'utente è generico o loggato, i dati presi dalle richieste Ajax GET vengono "disegnati" dinamicamente sulla pagina html.
+# Alcune scelte implementative
+Per la maggior parte delle classi abbiamo creato una pagina statica html dove sono raffigurate le componenti base della pagina e una pagina javascript che gestisce le componenti dinamiche.
+Per quanto riguarda le classi che utilizzano API, le richieste sono state effettuate tramite XMLHttpRequest, il quale invia una richiesta all'API per ottenere gli oggetti JSON di interesse.
+Mentre per le classi FrontOffice e BackOffice che utilizzano il DataBase di MongoDB e il server Node, sono state effettuate delle richieste tramite Ajax. Queste richieste Ajax vengono gestite nel file index.js, dove sono implementati i metodi che si occupano delle operazioni con il DataBase. Inoltre, nella classe index.js, si trovano le funzioni di routing che permettono il reindirizzamento al metodo corretto sulla base dell'url inserito nella richiesta.
+Nelle classi .js sono inoltre presenti i metodi per la creazione e modifica della grafica sulla base delle diverse necessità in maniera dinamica, ad esempio: il footer e la nav bar si modificano se l'utente è generico o loggato, i dati presi dalle richieste Ajax GET vengono "disegnati" dinamicamente sulla pagina html.

@@ -241,6 +241,7 @@ function drawBookings(bookingsData){
 function addPost() {
   var post = document.getElementById("inputPost").value;
   var image = document.getElementById("inputImage").files[0].name;
+  var imagePath = "http://localhost:3000/images/" + image;
 
   if (post.length > 0) {
     $.ajax({
@@ -249,7 +250,7 @@ function addPost() {
       contentType: 'application/json',
       data: JSON.stringify({
         "phrase": post,
-        "image": image
+        "image": imagePath
       }),
 
       success: function () {

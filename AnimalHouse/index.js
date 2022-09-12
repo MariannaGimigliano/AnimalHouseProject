@@ -542,16 +542,8 @@ getMemory = async function (req, res) {
     res.sendFile(__dirname + "/pages/memory.html");
 }
 
-getMemoryGenerico = async function (req, res) {
-    res.sendFile(__dirname + "/pages/memoryGenerico.html");
-}
-
 getQuiz = async function (req, res) {
     res.sendFile(__dirname + "/pages/quiz.html");
-}
-
-getQuizGenerico = async function (req, res) {
-    res.sendFile(__dirname + "/pages/quizGenerico.html");
 }
 
 getInfo = async function (req, res) {
@@ -620,11 +612,7 @@ app.get("/curiositaAnimali", getCuriositaAnimali);
 
 app.get("/memory", getMemory);
 
-app.get("/memoryGenerico", getMemoryGenerico);
-
 app.get("/quiz", getQuiz);
-
-app.get("/quizGenerico", getQuizGenerico);
 
 app.get("/logout", logout);
 

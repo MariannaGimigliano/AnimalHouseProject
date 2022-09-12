@@ -100,18 +100,18 @@ function mostraDomanda(animaliJSON) {
 
     rispostaCorretta.innerHTML = "La risposta corretta è: " + nomeAnimaleCorretto;
 
-    console.log(valoreRadioSelezionato + "/");
-    console.log(nomeAnimaleCorretto + "/");
+    //console.log(valoreRadioSelezionato + "/");
+    //console.log(nomeAnimaleCorretto + "/");
 
     if (valoreRadioSelezionato.trim() == nomeAnimaleCorretto.trim()) {
-      console.log("RISPOSTA SELEZIONATA CORRETTA");
+      //console.log("RISPOSTA SELEZIONATA CORRETTA");
       punteggio++;
-      console.log("Punteggio: " + punteggio);
+      //console.log("Punteggio: " + punteggio);
 
 
     } else if (valoreRadioSelezionato.trim() != nomeAnimaleCorretto.trim()) {
-      console.log("RISPOSTA SELEZIONATA NON CORRETTA");
-      console.log("Punteggio: " + punteggio);
+      //console.log("RISPOSTA SELEZIONATA NON CORRETTA");
+      //console.log("Punteggio: " + punteggio);
 
     }
 

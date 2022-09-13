@@ -16,13 +16,10 @@ function login() {
       if (request.readyState === XMLHttpRequest.DONE) {
         var status = request.status;
         if (status === 0 || (status >= 200 && status < 400)) {
-  
           console.log("login avvenuto con successo");
           console.log(request.responseText);
-  
           window.location.replace("/backOffice");
         } else {
-  
             alert("CREDENZIALI ERRATE");
         }
       }
@@ -40,10 +37,8 @@ function login() {
       if (request.readyState === XMLHttpRequest.DONE) {
         var status = request.status;
         if (status === 0 || (status >= 200 && status < 400)) {
-  
           console.log("login avvenuto con successo");
           console.log(request.responseText);
-  
           window.location.replace("/frontOffice");
         } else {
           alert("CREDENZIALI ERRATE");

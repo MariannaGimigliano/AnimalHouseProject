@@ -21,7 +21,6 @@ function register() {
           alert("Registrazione avvenuta con successo");
           window.location.replace("/loginPage");
         }
-
       } else {
         console.log("Error: " + request.status)
       }
